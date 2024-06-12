@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 	"github.com/phanitejak/kptgolib/kafka"
 	"github.com/phanitejak/kptgolib/logging"
 	"github.com/phanitejak/kptgolib/tracing"
