@@ -69,7 +69,7 @@ func GetAppCredentials(ctx context.Context, url string, credentialRequest AppCre
 	appCredentialProviderURL := fmt.Sprintf(appCredentialProviderURLPath, url)
 	reqestBody, err := json.Marshal(credentialRequest)
 
-	resp, err := httpClient.Post(appCredentialProviderURL, "application/vnd.nokia-system-credential-orchestrator-v1+json", bytes.NewBuffer(reqestBody))
+	resp, err := httpClient.Post(appCredentialProviderURL, "application/json", bytes.NewBuffer(reqestBody))
 	if err != nil {
 		return
 	}

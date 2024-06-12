@@ -19,7 +19,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
-const metricNamespace = "com_nokia_neo_metrics"
+const metricNamespace = "com_metrics"
 
 // DefaultEndPoint is the default endpoint for the exposed metrics.
 const (

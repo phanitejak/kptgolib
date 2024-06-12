@@ -10,11 +10,9 @@ Start using vault client:
 package main
 
 import (
-	"gerrit.ext.net.nokia.com/AANM/library/go/logging"
-
-	"gerrit.ext.net.nokia.com/AANM/library/go/vault"
+	"github.com/phanitejak/gopkg/logging"
+	"github.com/phanitejak/gopkg/vault"
 	"github.com/hashicorp/vault/api"
-
 	"github.com/stretchr/testify/assert"
 	"testing"
 	"fmt"
@@ -24,7 +22,7 @@ func main(){
     log := logging.NewLogger()
 
     client, err := vault.NewClient(
-    	"https://vault-server-address.neo.nokia.com",
+    	"https://vault-server-address",
     	"my-service-role",
     	vault.JwtPath("/var/run/secrets/kubernetes.io/serviceaccount/token")) // This is default mount path of JWT inside the pod
     if err != nil {
@@ -46,9 +44,8 @@ You can use mock vault client implementation to test your application behavior u
 package main
 
 import (
-	"gerrit.ext.net.nokia.com/AANM/library/go/vault"
+	"github.com/phanitejak/gopkg/vault"
 	"github.com/hashicorp/vault/api"
-
 	"github.com/stretchr/testify/assert"
 	"testing"
 	"errors"

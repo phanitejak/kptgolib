@@ -1,0 +1,18 @@
+//go:generate go run ../../../../tools/service-generator/cmd/service-generator/main.go
+<<<- " " >>>-name <<< .ServiceName >>>
+<<<- if .UseMySQL >>> -mysql<<< end >>>
+<<<- if .UsePgSQL >>> -pgsql<<< end >>>
+<<<- if .UseKafkaConsumer >>> -kafkac<<< end >>>
+<<<- if .UseKafkaProducer >>> -kafkap<<< end >>>
+//go:generate make -C ../../../../ oapi-gen/svc/<<< .ServiceName >>>
+package main
+
+import (
+	"github.com/phanitejak/gopkg/runner"
+	"svc/<<< .ServiceName >>>/internal/app"
+	_ "go.uber.org/automaxprocs"
+)
+
+func main() {
+	runner.RunApp(app.NewApp())
+}

@@ -55,7 +55,7 @@ func TestPusher(t *testing.T) {
 	enc := expfmt.NewEncoder(buf, expfmt.NewFormat(expfmt.TypeProtoDelim))
 
 	for _, mf := range mfs {
-		if strings.HasPrefix(mf.GetName(), "com_nokia_neo_metrics_neo_pushertest_") {
+		if strings.HasPrefix(mf.GetName(), "com_metrics_neo_pushertest_") {
 			if err := enc.Encode(mf); err != nil {
 				t.Fatal(err)
 			}

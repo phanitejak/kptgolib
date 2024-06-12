@@ -27,7 +27,7 @@ import (
 const plainMetricNameKey = "_plain_metric_name"
 
 var (
-	metricNamespace = "com_nokia_neo_metrics"
+	metricNamespace = "com_metrics"
 	statusEndPoint  = "/status"
 
 	testServerURLPrefix = "http://localhost"
@@ -772,7 +772,7 @@ func ExampleMustCrossRegisterKafkaProducerMetrics() {
 }
 
 func ExampleRegisterCounter() {
-	// Registers new custom counter metric named com_nokia_neo_metrics_my_service_foo_counter
+	// Registers new custom counter metric named com_metrics_my_service_foo_counter
 	testCounter := metrics.RegisterCounter("foo_counter", "my_service", "lorem ipsum...")
 
 	// Increment / add counter value
@@ -781,7 +781,7 @@ func ExampleRegisterCounter() {
 }
 
 func ExampleRegisterCounterVec() {
-	// Registers new custom counter vector metric named com_nokia_neo_metrics_my_service_foo_counter_with_tags{key1=<value>,key2=<value>}
+	// Registers new custom counter vector metric named com_metrics_my_service_foo_counter_with_tags{key1=<value>,key2=<value>}
 	testCounterVec := metrics.RegisterCounterVec("foo_counter_with_tags", "my_service", "lorem ipsum...", "key1", "key2")
 
 	// Increment / add counter value
@@ -792,7 +792,7 @@ func ExampleRegisterCounterVec() {
 }
 
 func ExampleRegisterGauge() {
-	// Registers new custom gauge metric named com_nokia_neo_metrics_my_service_foo_gauge
+	// Registers new custom gauge metric named com_metrics_my_service_foo_gauge
 	testGauge := metrics.RegisterGauge("foo_gauge", "my_service", "lorem ipsum...")
 
 	// Set / add / subtract gauge value
@@ -802,7 +802,7 @@ func ExampleRegisterGauge() {
 }
 
 func ExampleRegisterGaugeVec() {
-	// Registers new custom gauge vector metric named com_nokia_neo_metrics_my_service_foo_gauge_with_tags{key1=<value>,key2=<value>}
+	// Registers new custom gauge vector metric named com_metrics_my_service_foo_gauge_with_tags{key1=<value>,key2=<value>}
 	testGaugeVec := metrics.RegisterGaugeVec("foo_gauge_with_tags", "my_service", "lorem ipsum...", "key1", "key2")
 
 	// Set / add / subtract gauge value
@@ -815,7 +815,7 @@ func ExampleRegisterGaugeVec() {
 }
 
 func ExampleRegisterSummaryWithObjectives() {
-	// Registers new custom summary metric named com_nokia_neo_metrics_my_service_foo_summary
+	// Registers new custom summary metric named com_metrics_my_service_foo_summary
 	testSummary := metrics.RegisterSummaryWithObjectives("foo_summary", "my_service", "lorem ipsum...", map[float64]float64{0: 0, 0.25: 0.025, 0.5: 0.05, 0.75: 0.025, 0.9: 0.01, 0.99: 0.001, 1: 0})
 
 	// Observe summary value
@@ -823,7 +823,7 @@ func ExampleRegisterSummaryWithObjectives() {
 }
 
 func ExampleRegisterSummary_observe() {
-	// Registers new custom summary metric named com_nokia_neo_metrics_my_service_foo_summary
+	// Registers new custom summary metric named com_metrics_my_service_foo_summary
 	testSummary := metrics.RegisterSummary("foo_summary", "my_service", "lorem ipsum...")
 
 	// Observe summary value
@@ -831,7 +831,7 @@ func ExampleRegisterSummary_observe() {
 }
 
 func ExampleRegisterSummary_observeDuration() {
-	// Registers new custom summary metric named com_nokia_neo_metrics_my_service_foo_time
+	// Registers new custom summary metric named com_metrics_my_service_foo_time
 	testSummary := metrics.RegisterSummary("foo_time", "my_service", "lorem ipsum...")
 	// Get start time of business logic execution
 	start := time.Now()
@@ -843,7 +843,7 @@ func ExampleRegisterSummary_observeDuration() {
 }
 
 func ExampleRegisterSummaryVec() {
-	// Registers new custom summary vector metric named com_nokia_neo_metrics_my_service_foo_summary_with_tags{key1=<value>,key2=<value>}
+	// Registers new custom summary vector metric named com_metrics_my_service_foo_summary_with_tags{key1=<value>,key2=<value>}
 	testSummaryVec := metrics.RegisterSummaryVec("foo_summary_with_tags", "my_service", "lorem ipsum...", "key1", "key2")
 
 	// Observe summary value

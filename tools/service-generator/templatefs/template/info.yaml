@@ -1,0 +1,14 @@
+project_info:
+  project: <<< .ServiceName >>>
+  competence_area:
+  functional_area:
+  product:
+  description:
+  project_lead:
+  architect:
+  product_manager:
+  project_team:
+  teams_channel:
+  guardians:
+  - dev1@gmail.com
+  - dev2@gmail.com

@@ -15,7 +15,7 @@ import (
 type contextKey string
 
 const (
-	contextKeyURLTemplate = contextKey("com_nokia_neo_metrics_url_template")
+	contextKeyURLTemplate = contextKey("com_metrics_url_template")
 )
 
 // InstrumentedHTTPClient represents standard http.Client with metrics instrumentation capabilities.
