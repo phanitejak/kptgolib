@@ -1,0 +1,115 @@
+// Package app wraps the <<< .ServiceName >>> logic and exposes it as an application
+// which can be managed by runner.Run.
+package app
+
+import (
+	"fmt"
+
+	"gerrit.ext.net.nokia.com/AANM/go/pkg/runner"
+	"gerrit.ext.net.nokia.com/AANM/go/pkg/runner/modules/httpmod"
+	<<<- if or .UseKafkaProducer .UseKafkaConsumer >>>
+	"gerrit.ext.net.nokia.com/AANM/go/pkg/runner/modules/kafkamod"
+	<<<- end >>>
+	<<<- if .UseMySQL >>>
+	"gerrit.ext.net.nokia.com/AANM/go/pkg/runner/modules/mariamod"
+	<<<- end >>>
+	<<<- if .UsePgSQL >>>
+	"gerrit.ext.net.nokia.com/AANM/go/pkg/runner/modules/postgresmod"
+	<<<- end >>>
+	"gerrit.ext.net.nokia.com/AANM/go/pkg/runner/modules/tracermod"
+	"gerrit.ext.net.nokia.com/AANM/go/pkg/tracing"
+	<<<- if .UseMySQL >>>
+	"gerrit.ext.net.nokia.com/AANM/go/svc/<<< .ServiceName >>>/internal/db"
+	<<<- end >>>
+)
+
+// App wraps application logic in single unit runnable by runner.Run.
+type App struct {
+	<<<- if or .UseMySQL >>>
+	storage       *db.MariaStorage
+	<<<- end >>>
+	modules
+}
+
+// NewApp returns a pointer to new App struct
+func NewApp() *App {
+	<<<- if .UseKafkaConsumer >>>
+	var h kafkamod.HandleFn
+	<<<- end >>>
+	<<<- if .UseKafkaProducer >>>
+	prod := kafkamod.NewProducer(kafkamod.WithProducerEnvConfig())
+	<<<- end >>>
+
+	return &App{
+		modules: modules{
+			tracer: tracermod.NewGlobalTracer(),
+			server: httpmod.NewServer(httpmod.FromEnv(), httpmod.WithManagementServer()),
+			<<<- if .UseKafkaConsumer >>>
+			consumer: kafkamod.NewConsumer(
+				kafkamod.WithConsumerEnvConfig(),
+				kafkamod.WithConsumerHandler(kafkamod.NewConcurrentGroupConsumer(h)),
+			),
+			<<<- end >>>
+			<<<- if .UseKafkaProducer >>>
+			producer: prod,
+			<<<- end >>>
+			<<<- if .UseMySQL >>>
+			mariadb: mariamod.NewDB(mariamod.FromEnv()),
+			<<<- end >>>
+			<<<- if .UsePgSQL >>>
+			postgresdb: postgresmod.NewDB(postgresmod.FromEnv()),
+			<<<- end >>>
+		},
+	}
+}
+
+// Name returns the name of app.
+func (a *App) Name() string {
+	return "<<< .ServiceName >>>"
+}
+
+// Modules return list of app modules
+func (a *App) Modules() []runner.Module {
+	// TODO: use module packages.
+	return []runner.Module{
+		a.tracer,
+		a.server,
+		<<<- if .UseKafkaConsumer >>>
+		a.consumer,
+		<<<- end >>>
+		<<<- if .UseKafkaProducer >>>
+		a.producer,
+		<<<- end >>>
+		<<<- if .UseMySQL >>>
+		a.mariadb,
+		<<<- end >>>
+		<<<- if .UsePgSQL >>>
+		a.postgresdb,
+		<<<- end >>>
+		a,
+	}
+}
+
+// URL returns the HTTP server URL
+func (a *App) URL() string {
+	return a.server.URL()
+}
+
+// Init app.
+func (a *App) Init(log *tracing.Logger) error {
+	<<<- if or .UseMySQL >>>
+	a.storage = db.NewStorage(a.mariadb.DB())
+	<<<- end >>>
+
+	return nil
+}
+
+// Run app.
+func (a *App) Run() error {
+	return nil
+}
+
+// Close app.
+func (a *App) Close() error {
+	return nil
+}

@@ -1,0 +1,63 @@
+// +build integration
+
+package app_test
+
+import (
+	"context"
+	"os"
+	"testing"
+
+	"gerrit.ext.net.nokia.com/AANM/go/pkg/logging/loggingtest"
+	"gerrit.ext.net.nokia.com/AANM/go/pkg/runner"
+	"gerrit.ext.net.nokia.com/AANM/go/pkg/tracing"
+	"gerrit.ext.net.nokia.com/AANM/go/svc/<<< .ServiceName >>>/internal/app"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+)
+
+<<<- if .UseKafkaConsumer >>>
+const (
+	sampleTopic         = "<<< .ServiceName >>>-test"
+	sampleConsumerGroup = "<<< .ServiceName >>>-test-group"
+)
+<<<- end >>>
+
+type testCase struct {
+	name         string
+	wantExitCode int
+}
+
+func TestIntegrationApp(t *testing.T) {
+	testCases := []testCase{
+		{
+			name:         "finishes with a zero exit code",
+			wantExitCode: 0,
+		},
+	}
+
+	for _, tc := range testCases {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			exitCode := make(chan int)
+			log := tracing.NewLogger(loggingtest.NewTestLogger(t))
+
+			initTestEnv(t)
+
+			ctx, stop := context.WithCancel(context.Background())
+			r := runner.NewRunner(ctx, log)
+			go func() { exitCode <- r.Run(app.NewApp()) }()
+			r.Ready()
+
+			stop()
+			assert.Equal(t, tc.wantExitCode, <-exitCode, "")
+		})
+	}
+}
+
+func initTestEnv(t *testing.T) {
+	<<<- if .UseKafkaConsumer >>>
+	require.NoError(t, os.Setenv("KAFKA_CONSUMER_TOPICS", sampleTopic))
+	require.NoError(t, os.Setenv("KAFKA_CONSUMER_GROUP", sampleConsumerGroup))
+	<<<- end >>>
+	require.NoError(t, os.Setenv("SAMPLE_ENV_VAR", "<<< .ServiceName >>>"))
+}

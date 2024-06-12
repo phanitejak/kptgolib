@@ -1,0 +1,71 @@
+registry: ${DOCKER_REGISTRY}
+releaseRegistry: ${DOCKER_RELEASE_REGISTRY}
+global:
+  helper_antiAffinityMode: soft
+replicaCount: 1
+image:
+  repository: <<< .ServiceName >>>
+  pullPolicy: IfNotPresent
+  <<<- if .UseMySQL >>>
+  dbRepository: service-db-maria
+  dbTag: 0.0.69
+  dbMigrationImage: <<< .ServiceName >>>-migrate
+  dbMigrationTag: 3-0.0.109
+  <<<- end >>>
+service:
+  name: <<< .ServiceName >>>
+  type: ClusterIP
+  externalPort: 80
+  port: 8080
+resources:
+  # Limits to cap the resource usage in case of unexpected.
+  #   NOTE! exceeding memory limit will cause pod to be killed by kubernetes.
+  limits:
+    cpu: 1
+    memory: 512Mi
+  # Requests to help kubernetes start pods on a node that has sufficient capacity.
+  requests:
+    cpu: 100m
+    memory: 128Mi
+tracing:
+  enabled: false
+  collectorEndpoint: http://neo-jaeger-collector:14268/api/traces
+  samplerType: probabilistic
+  samplerParameter: 1
+  logSpans: false
+env:
+  <<<- if .UseKafkaConsumer >>>
+  kafkaBootstrapServer: kf-ckaf-kafka.default:9092
+  kafkaConsumerTopic: schedule
+  kafkaConsumerGroup: <<< .ServiceName >>>-consumer-group
+  kafkaRetryEnabled: true
+  kafkaRetryWaitTimeout: 1
+  <<<- end >>>
+  <<<- if .UseMySQL >>>
+  mariaDbUserName: root
+  mariaDbAddress: cmdb-cmdb.default:3306
+  mariaDbName: <<< .ServiceName >>>
+  mariaDbMaxOpenConnections: 10
+  mariaDbMaxIdleConnections: 5
+  mariaDbConnectionMaxLifetimeSeconds: 30
+  mariaDbTLSEnabled: false
+  <<<- end >>>
+  <<<- if .UsePgSQL >>>
+  postgresDbUserName: root
+  postgresDbAddress: cmdb-cmdb.default:3306
+  postgresDbName: <<< .ServiceName >>>
+  postgresDbMaxOpenConnections: 10
+  postgresDbMaxIdleConnections: 5
+  postgresDbConnectionMaxLifetimeSeconds: 30
+  postgresDbTLSEnabled: false
+  <<<- end >>>
+  entityName: cmdb
+  appCredentialProviderUrl: http://system-credential-orchestrator-svc.credential.svc.cluster.local
+  dbType: mysql
+  dbSourceUri: file:///migrations/maria
+  # loggingLevel defines minimun level to be logged.
+  #   allowed values: debug, info, error
+  loggingLevel: info
+  pollingIntervalSecs: 1
+  zookeeperHosts: zk-ckaf-kafka.default:2181
+  isTLSEnabled: false
