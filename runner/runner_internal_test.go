@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/phanitejak/gopkg/tracing"
+	"github.com/phanitejak/kptgolib/tracing"
 	"github.com/stretchr/testify/assert"
 )
 

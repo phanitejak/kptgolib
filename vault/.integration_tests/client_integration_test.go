@@ -22,7 +22,7 @@ import (
 	vaulthttp "github.com/hashicorp/vault/http"
 	"github.com/hashicorp/vault/sdk/logical"
 	vaultserver "github.com/hashicorp/vault/vault"
-	"github.com/phanitejak/gopkg/vault"
+	"github.com/phanitejak/kptgolib/vault"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

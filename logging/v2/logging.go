@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"github.com/opentracing/opentracing-go"
-	"github.com/phanitejak/gopkg/logging"
+	"github.com/phanitejak/kptgolib/logging"
 	"github.com/sirupsen/logrus"
 	"github.com/uber/jaeger-client-go"
 )

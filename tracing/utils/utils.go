@@ -5,7 +5,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/phanitejak/gopkg/tracing"
+	"github.com/phanitejak/kptgolib/tracing"
 	"go.opentelemetry.io/otel"
 )
 

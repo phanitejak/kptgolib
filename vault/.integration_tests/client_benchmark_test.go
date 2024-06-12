@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/hashicorp/vault/api"
-	"github.com/phanitejak/gopkg/vault"
+	"github.com/phanitejak/kptgolib/vault"
 	"github.com/stretchr/testify/require"
 )
 

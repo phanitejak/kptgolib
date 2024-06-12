@@ -9,7 +9,7 @@ import (
 	"github.com/go-gorp/gorp/v3"
 	"github.com/go-sql-driver/mysql"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/phanitejak/gopkg/neosql"
+	"github.com/phanitejak/kptgolib/neosql"
 )
 
 // NewDBMap wraps *sql.DB into *gorp.DbMap.

@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/phanitejak/gopkg/logging/loggingtest"
-	"github.com/phanitejak/gopkg/runner"
-	"github.com/phanitejak/gopkg/tracing"
+	"github.com/phanitejak/kptgolib/logging/loggingtest"
+	"github.com/phanitejak/kptgolib/runner"
+	"github.com/phanitejak/kptgolib/tracing"
 	"github.com/stretchr/testify/assert"
 )
 

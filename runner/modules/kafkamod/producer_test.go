@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/IBM/sarama"
-	"github.com/phanitejak/gopkg/metrics"
-	"github.com/phanitejak/gopkg/runner/modules/kafkamod"
+	"github.com/phanitejak/kptgolib/metrics"
+	"github.com/phanitejak/kptgolib/runner/modules/kafkamod"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -6,8 +6,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/phanitejak/gopkg/logging"
-	"github.com/phanitejak/gopkg/tracing"
+	"github.com/phanitejak/kptgolib/logging"
+	"github.com/phanitejak/kptgolib/tracing"
 )
 
 func TestNewMinioReplicationMetricJob_Run(t *testing.T) {

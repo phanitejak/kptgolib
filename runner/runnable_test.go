@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/hashicorp/go-multierror"
-	"github.com/phanitejak/gopkg/runner"
+	"github.com/phanitejak/kptgolib/runner"
 	"github.com/stretchr/testify/assert"
 )
 

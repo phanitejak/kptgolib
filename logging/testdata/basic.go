@@ -4,7 +4,7 @@ import (
 	"os"
 
 	// empty line to match line numbers
-	"github.com/phanitejak/gopkg/logging"
+	"github.com/phanitejak/kptgolib/logging"
 )
 
 func main() {

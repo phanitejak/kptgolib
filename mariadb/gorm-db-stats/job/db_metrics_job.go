@@ -5,8 +5,8 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/phanitejak/gopkg/mariadb/gorm-db-stats/exporter"
-	"github.com/phanitejak/gopkg/tracing"
+	"github.com/phanitejak/kptgolib/mariadb/gorm-db-stats/exporter"
+	"github.com/phanitejak/kptgolib/tracing"
 )
 
 // StoreStats ...

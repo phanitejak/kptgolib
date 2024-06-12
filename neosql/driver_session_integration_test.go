@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/go-sql-driver/mysql"
-	"github.com/phanitejak/gopkg/mariadb"
-	"github.com/phanitejak/gopkg/neosql"
+	"github.com/phanitejak/kptgolib/mariadb"
+	"github.com/phanitejak/kptgolib/neosql"
 	"github.com/stretchr/testify/require"
 )
 

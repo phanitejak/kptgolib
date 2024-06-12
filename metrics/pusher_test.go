@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/phanitejak/gopkg/metrics"
+	"github.com/phanitejak/kptgolib/metrics"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/expfmt"
 	"github.com/stretchr/testify/assert"

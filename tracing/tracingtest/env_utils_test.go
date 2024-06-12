@@ -5,8 +5,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/phanitejak/gopkg/tracing"
-	"github.com/phanitejak/gopkg/tracing/utils"
+	"github.com/phanitejak/kptgolib/tracing"
+	"github.com/phanitejak/kptgolib/tracing/utils"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"go.opentelemetry.io/otel/attribute"

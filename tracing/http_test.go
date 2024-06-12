@@ -10,8 +10,8 @@ import (
 	"testing"
 
 	"github.com/gorilla/mux"
-	"github.com/phanitejak/gopkg/tracing"
-	"github.com/phanitejak/gopkg/tracing/tracingtest"
+	"github.com/phanitejak/kptgolib/tracing"
+	"github.com/phanitejak/kptgolib/tracing/tracingtest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

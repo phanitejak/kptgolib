@@ -10,8 +10,8 @@ Start using vault client:
 package main
 
 import (
-	"github.com/phanitejak/gopkg/logging"
-	"github.com/phanitejak/gopkg/vault"
+	"github.com/phanitejak/kptgolib/logging"
+	"github.com/phanitejak/kptgolib/vault"
 	"github.com/hashicorp/vault/api"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -44,7 +44,7 @@ You can use mock vault client implementation to test your application behavior u
 package main
 
 import (
-	"github.com/phanitejak/gopkg/vault"
+	"github.com/phanitejak/kptgolib/vault"
 	"github.com/hashicorp/vault/api"
 	"github.com/stretchr/testify/assert"
 	"testing"

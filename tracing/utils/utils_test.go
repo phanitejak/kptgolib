@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/phanitejak/gopkg/tracing/tracingtest"
+	"github.com/phanitejak/kptgolib/tracing/tracingtest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

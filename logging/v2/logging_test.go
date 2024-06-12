@@ -15,12 +15,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/phanitejak/gopkg/logging/v2"
-	"github.com/phanitejak/gopkg/logging/v2/testutil"
-	"github.com/phanitejak/gopkg/metrics"
-	"github.com/phanitejak/gopkg/testutils"
-	"github.com/phanitejak/gopkg/tracing"
-	"github.com/phanitejak/gopkg/tracing/tracingtest"
+	"github.com/phanitejak/kptgolib/logging/v2"
+	"github.com/phanitejak/kptgolib/logging/v2/testutil"
+	"github.com/phanitejak/kptgolib/metrics"
+	"github.com/phanitejak/kptgolib/testutils"
+	"github.com/phanitejak/kptgolib/tracing"
+	"github.com/phanitejak/kptgolib/tracing/tracingtest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

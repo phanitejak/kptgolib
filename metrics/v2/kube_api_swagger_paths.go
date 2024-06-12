@@ -3,7 +3,7 @@ package metrics
 import (
 	"encoding/json"
 
-	"github.com/phanitejak/gopkg/metrics"
+	"github.com/phanitejak/kptgolib/metrics"
 )
 
 // Paths content is got from NOM cluster by using command:

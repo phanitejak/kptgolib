@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/phanitejak/gopkg/metrics"
-	metricsv2 "github.com/phanitejak/gopkg/metrics/v2"
+	"github.com/phanitejak/kptgolib/metrics"
+	metricsv2 "github.com/phanitejak/kptgolib/metrics/v2"
 	"github.com/stretchr/testify/assert"
 )
 

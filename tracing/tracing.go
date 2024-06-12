@@ -8,9 +8,9 @@ import (
 	"strconv"
 
 	"github.com/go-logr/logr"
-	"github.com/phanitejak/gopkg/logging"
-	loggingv2 "github.com/phanitejak/gopkg/logging/v2"
-	"github.com/phanitejak/gopkg/tracing/configuration"
+	"github.com/phanitejak/kptgolib/logging"
+	loggingv2 "github.com/phanitejak/kptgolib/logging/v2"
+	"github.com/phanitejak/kptgolib/tracing/configuration"
 	jaegerpropagator "go.opentelemetry.io/contrib/propagators/jaeger"
 	"go.opentelemetry.io/otel"
 	exporter "go.opentelemetry.io/otel/exporters/jaeger"

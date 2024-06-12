@@ -1,7 +1,7 @@
 package logging
 
 import (
-	"github.com/phanitejak/gopkg/metrics"
+	"github.com/phanitejak/kptgolib/metrics"
 	"github.com/sirupsen/logrus"
 )
 

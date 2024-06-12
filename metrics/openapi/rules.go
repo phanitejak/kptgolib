@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/getkin/kin-openapi/openapi3"
-	"github.com/phanitejak/gopkg/metrics"
+	"github.com/phanitejak/kptgolib/metrics"
 )
 
 var rulePattern = regexp.MustCompile(`(?s)({[^}]*})`)

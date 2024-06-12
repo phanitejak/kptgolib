@@ -15,8 +15,8 @@ Version 2 of the logging library, which enforces trace context usage.
 package example
 
 import (
-	"github.com/phanitejak/gopkg/logging-v2"
-	"github.com/phanitejak/gopkg/tracing"
+	"github.com/phanitejak/kptgolib/logging-v2"
+	"github.com/phanitejak/kptgolib/tracing"
 )
 
 func main() {
@@ -47,7 +47,7 @@ package example
 import (
 	"context"
 
-	"github.com/phanitejak/gopkg/logging-v2"
+	"github.com/phanitejak/kptgolib/logging-v2"
 	"github.com/opentracing/opentracing-go"
 )
 

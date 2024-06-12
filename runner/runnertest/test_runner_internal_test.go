@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/phanitejak/gopkg/runner"
+	"github.com/phanitejak/kptgolib/runner"
 	"github.com/stretchr/testify/assert"
 )
 

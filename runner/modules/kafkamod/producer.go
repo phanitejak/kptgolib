@@ -7,8 +7,8 @@ import (
 	"github.com/IBM/sarama"
 	"github.com/hashicorp/go-multierror"
 	"github.com/kelseyhightower/envconfig"
-	"github.com/phanitejak/gopkg/metrics"
-	"github.com/phanitejak/gopkg/tracing"
+	"github.com/phanitejak/kptgolib/metrics"
+	"github.com/phanitejak/kptgolib/tracing"
 )
 
 // ProducerMessage adds context to sarama.ProducerMessage.

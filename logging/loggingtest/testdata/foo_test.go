@@ -3,8 +3,8 @@ package foo
 import (
 	"testing"
 
-	"github.com/phanitejak/gopkg/logging/loggingtest"
-	"github.com/phanitejak/gopkg/tracing"
+	"github.com/phanitejak/kptgolib/logging/loggingtest"
+	"github.com/phanitejak/kptgolib/tracing"
 )
 
 func TestStack(t *testing.T) {

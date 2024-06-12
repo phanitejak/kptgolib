@@ -3,7 +3,7 @@ package mariadb
 import (
 	"github.com/go-sql-driver/mysql"
 	"github.com/kelseyhightower/envconfig"
-	"github.com/phanitejak/gopkg/credentialreader"
+	"github.com/phanitejak/kptgolib/credentialreader"
 )
 
 // Config for SQL connection.

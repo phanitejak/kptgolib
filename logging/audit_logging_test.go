@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/phanitejak/gopkg/logging"
-	"github.com/phanitejak/gopkg/logging/testutil"
+	"github.com/phanitejak/kptgolib/logging"
+	"github.com/phanitejak/kptgolib/logging/testutil"
 	"github.com/stretchr/testify/assert"
 )
 

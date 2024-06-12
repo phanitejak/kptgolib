@@ -5,8 +5,8 @@ import (
 	"os/exec"
 	"testing"
 
-	"github.com/phanitejak/gopkg/logging/v2"
-	"github.com/phanitejak/gopkg/logging/v2/loggingtest"
+	"github.com/phanitejak/kptgolib/logging/v2"
+	"github.com/phanitejak/kptgolib/logging/v2/loggingtest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

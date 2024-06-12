@@ -11,10 +11,10 @@ import (
 	"time"
 
 	"github.com/IBM/sarama"
-	"github.com/phanitejak/gopkg/kafka"
-	"github.com/phanitejak/gopkg/logging/loggingtest"
-	"github.com/phanitejak/gopkg/runner/modules/kafkamod"
-	"github.com/phanitejak/gopkg/tracing"
+	"github.com/phanitejak/kptgolib/kafka"
+	"github.com/phanitejak/kptgolib/logging/loggingtest"
+	"github.com/phanitejak/kptgolib/runner/modules/kafkamod"
+	"github.com/phanitejak/kptgolib/tracing"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

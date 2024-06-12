@@ -7,8 +7,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/phanitejak/gopkg/credentialreader"
-	"github.com/phanitejak/gopkg/mariadb"
+	"github.com/phanitejak/kptgolib/credentialreader"
+	"github.com/phanitejak/kptgolib/mariadb"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

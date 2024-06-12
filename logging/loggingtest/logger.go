@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/phanitejak/gopkg/logging"
+	"github.com/phanitejak/kptgolib/logging"
 )
 
 // TestLogger is decorting testing.T with logging.Logger.

@@ -4,9 +4,9 @@ import (
 	"context"
 	"os"
 
-	"github.com/phanitejak/gopkg/logging"
+	"github.com/phanitejak/kptgolib/logging"
 
-	"github.com/phanitejak/gopkg/tracing"
+	"github.com/phanitejak/kptgolib/tracing"
 )
 
 func main() {

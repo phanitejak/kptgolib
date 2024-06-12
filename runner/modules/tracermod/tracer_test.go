@@ -3,9 +3,9 @@ package tracermod_test
 import (
 	"testing"
 
-	"github.com/phanitejak/gopkg/logging/loggingtest"
-	"github.com/phanitejak/gopkg/runner/modules/tracermod"
-	"github.com/phanitejak/gopkg/tracing"
+	"github.com/phanitejak/kptgolib/logging/loggingtest"
+	"github.com/phanitejak/kptgolib/runner/modules/tracermod"
+	"github.com/phanitejak/kptgolib/tracing"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

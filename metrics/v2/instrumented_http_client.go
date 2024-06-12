@@ -9,7 +9,7 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/phanitejak/gopkg/metrics"
+	"github.com/phanitejak/kptgolib/metrics"
 )
 
 type contextKey string

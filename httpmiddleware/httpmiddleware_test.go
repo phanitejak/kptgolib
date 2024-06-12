@@ -11,8 +11,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/phanitejak/gopkg/httpmiddleware"
-	"github.com/phanitejak/gopkg/logging"
+	"github.com/phanitejak/kptgolib/httpmiddleware"
+	"github.com/phanitejak/kptgolib/logging"
 
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/getkin/kin-openapi/openapi3filter"

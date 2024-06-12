@@ -4,9 +4,9 @@ package exporter
 import (
 	"database/sql"
 
-	"github.com/phanitejak/gopkg/gerror"
-	"github.com/phanitejak/gopkg/logging"
-	"github.com/phanitejak/gopkg/metrics"
+	"github.com/phanitejak/kptgolib/gerror"
+	"github.com/phanitejak/kptgolib/logging"
+	"github.com/phanitejak/kptgolib/metrics"
 )
 
 const (

@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/phanitejak/gopkg/metrics"
-	"github.com/phanitejak/gopkg/metrics/openapi"
-	"github.com/phanitejak/gopkg/tracing"
+	"github.com/phanitejak/kptgolib/metrics"
+	"github.com/phanitejak/kptgolib/metrics/openapi"
+	"github.com/phanitejak/kptgolib/tracing"
 
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/getkin/kin-openapi/openapi3filter"
