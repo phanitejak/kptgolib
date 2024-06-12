@@ -1,4 +1,4 @@
-module github.com/phanitejak/gopkg
+module github.com/phanitejak/kptgolib
 
 go 1.22.0
 
