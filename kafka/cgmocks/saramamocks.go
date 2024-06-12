@@ -4,34 +4,37 @@
 //
 // In production code define following instead of using sarama.NewConsumerGroup directly:
 // 1.
-// 		// NewConsumerGroup is abstracting the sarama interfaces in order to do better unit testing.
-// 		type NewConsumerGroup func(addrs []string, groupID string, config *sarama.Config) (sarama.ConsumerGroup, error)
+//
+//	// NewConsumerGroup is abstracting the sarama interfaces in order to do better unit testing.
+//	type NewConsumerGroup func(addrs []string, groupID string, config *sarama.Config) (sarama.ConsumerGroup, error)
 //
 // 2.
-//		in init-code use sarama.NewConsumerGroup as implementation of that interface.
 //
+//	in init-code use sarama.NewConsumerGroup as implementation of that interface.
 //
 // 3.
 // In unit tests do following to initialize  :
-// 		config := mocks.NewTestConfig()
-// 		cg, err := cgmocks.NewConsumerGroup([]string{"localhost"}, "testGroupID", config)
-// 		assert.NoError(t, err)
-// 		fnc := func(addrs []string, groupID string, config *sarama.Config) (sarama.ConsumerGroup, error) {
-// 			return cg, nil
-// 		}
-//      pass fnc to your production code init instead of sarama.NewConsumerGroup
+//
+//			config := mocks.NewTestConfig()
+//			cg, err := cgmocks.NewConsumerGroup([]string{"localhost"}, "testGroupID", config)
+//			assert.NoError(t, err)
+//			fnc := func(addrs []string, groupID string, config *sarama.Config) (sarama.ConsumerGroup, error) {
+//				return cg, nil
+//			}
+//	     pass fnc to your production code init instead of sarama.NewConsumerGroup
 //
 // 4.
+//
 //	In unit test first define which topic-partition to fake subscription to and then pass the messages you want to be read from:
-// 		claim1 := mockCG.YeldNewClaim(conf.Topics[0], 1, 0)
-// 		claim1.YeldMessage4("{\"status\":\"ongoing\",\"operationId\":\"1234567890\"}")
+//		claim1 := mockCG.YeldNewClaim(conf.Topics[0], 1, 0)
+//		claim1.YeldMessage4("{\"status\":\"ongoing\",\"operationId\":\"1234567890\"}")
 package cgmocks
 
 import (
 	"context"
 	"fmt"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 	"go.uber.org/atomic"
 )
 
