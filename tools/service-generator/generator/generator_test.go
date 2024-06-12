@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"gopkg/tools/service-generator/utils"
+	"github.com/phanitejak/gopkg/tools/service-generator/utils"
 
 	"github.com/stretchr/testify/assert"
 )

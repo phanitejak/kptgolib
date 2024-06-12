@@ -4,8 +4,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"gopkg/tools/service-generator/generator"
-	"gopkg/tools/service-generator/utils"
+	"github.com/phanitejak/gopkg/tools/service-generator/generator"
+	"github.com/phanitejak/gopkg/tools/service-generator/utils"
 )
 
 // osExit allows overwritting os.Exit for testing purposes.

@@ -8,6 +8,9 @@ import (
 	"strconv"
 
 	"github.com/go-logr/logr"
+	"github.com/phanitejak/gopkg/logging"
+	loggingv2 "github.com/phanitejak/gopkg/logging/v2"
+	"github.com/phanitejak/gopkg/tracing/configuration"
 	jaegerpropagator "go.opentelemetry.io/contrib/propagators/jaeger"
 	"go.opentelemetry.io/otel"
 	exporter "go.opentelemetry.io/otel/exporters/jaeger"
@@ -15,9 +18,6 @@ import (
 	"go.opentelemetry.io/otel/sdk/resource"
 	tracesdk "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.10.0"
-	"gopkg/logging"
-	loggingv2 "gopkg/logging/v2"
-	"gopkg/tracing/configuration"
 )
 
 type conf struct {

@@ -3,9 +3,9 @@ package runnertest_test
 import (
 	"testing"
 
+	"github.com/phanitejak/gopkg/runner"
+	"github.com/phanitejak/gopkg/runner/runnertest"
 	"github.com/stretchr/testify/assert"
-	"gopkg/runner"
-	"gopkg/runner/runnertest"
 )
 
 func TestRunAndCleanup(t *testing.T) {

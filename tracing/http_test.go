@@ -10,10 +10,10 @@ import (
 	"testing"
 
 	"github.com/gorilla/mux"
+	"github.com/phanitejak/gopkg/tracing"
+	"github.com/phanitejak/gopkg/tracing/tracingtest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gopkg/tracing"
-	"gopkg/tracing/tracingtest"
 )
 
 const deprecatedParentID = 0

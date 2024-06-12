@@ -4,9 +4,9 @@ import (
 	"context"
 	"testing"
 
+	"github.com/phanitejak/gopkg/tracing/tracingtest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gopkg/tracing/tracingtest"
 )
 
 const OperationID = "afa0a9f161f6442e8c0cb626697f5393"

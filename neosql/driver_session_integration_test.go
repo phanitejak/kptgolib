@@ -10,9 +10,9 @@ import (
 	"time"
 
 	"github.com/go-sql-driver/mysql"
+	"github.com/phanitejak/gopkg/mariadb"
+	"github.com/phanitejak/gopkg/neosql"
 	"github.com/stretchr/testify/require"
-	"gopkg/mariadb"
-	"gopkg/neosql"
 )
 
 func TestIntegrationAuthRefreshDriverSession(t *testing.T) {

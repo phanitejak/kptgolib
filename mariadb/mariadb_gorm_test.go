@@ -3,10 +3,10 @@ package mariadb_test
 import (
 	"testing"
 
+	"github.com/phanitejak/gopkg/logging"
+	"github.com/phanitejak/gopkg/mariadb"
+	"github.com/phanitejak/gopkg/tracing"
 	"github.com/stretchr/testify/require"
-	"gopkg/logging"
-	"gopkg/mariadb"
-	"gopkg/tracing"
 )
 
 func TestNewDBClientFromENV(t *testing.T) {

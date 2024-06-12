@@ -6,10 +6,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/phanitejak/gopkg/logging/loggingtest"
+	"github.com/phanitejak/gopkg/runner"
+	"github.com/phanitejak/gopkg/tracing"
 	"github.com/stretchr/testify/assert"
-	"gopkg/logging/loggingtest"
-	"gopkg/runner"
-	"gopkg/tracing"
 )
 
 // RunAndCleanup starts the App and expects it to exit with exit code 0.

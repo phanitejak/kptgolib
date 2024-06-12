@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"testing"
 
+	"github.com/phanitejak/gopkg/logging"
+	"github.com/phanitejak/gopkg/logging/testutil"
 	"github.com/stretchr/testify/assert"
-	"gopkg/logging"
-	"gopkg/logging/testutil"
 )
 
 func TestDefaultFieldsAudit(t *testing.T) {

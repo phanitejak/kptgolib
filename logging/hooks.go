@@ -1,8 +1,8 @@
 package logging
 
 import (
+	"github.com/phanitejak/gopkg/metrics"
 	"github.com/sirupsen/logrus"
-	"gopkg/metrics"
 )
 
 // MetricsHook exposes Prometheus counters for each of logrus' log levels.

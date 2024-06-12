@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"gopkg/gerror"
+	"github.com/phanitejak/gopkg/gerror"
 )
 
 func TestGetErrorMessage(t *testing.T) {

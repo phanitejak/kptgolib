@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	"github.com/go-logr/logr"
-	"gopkg/logging"
-	loggingv2 "gopkg/logging/v2"
+	"github.com/phanitejak/gopkg/logging"
+	loggingv2 "github.com/phanitejak/gopkg/logging/v2"
 )
 
 // logrLoggerAdapter implements logr.LogSink interface for logging.Logger implementation.

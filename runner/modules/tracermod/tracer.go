@@ -4,7 +4,7 @@ package tracermod
 import (
 	"io"
 
-	"gopkg/tracing"
+	"github.com/phanitejak/gopkg/tracing"
 )
 
 // GlobalTracer allows running tracer as module.

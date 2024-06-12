@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/phanitejak/gopkg/logging/loggingtest"
+	"github.com/phanitejak/gopkg/runner"
+	"github.com/phanitejak/gopkg/tracing"
 	"github.com/stretchr/testify/assert"
-	"gopkg/logging/loggingtest"
-	"gopkg/runner"
-	"gopkg/tracing"
 )
 
 func TestAppRunner(t *testing.T) {

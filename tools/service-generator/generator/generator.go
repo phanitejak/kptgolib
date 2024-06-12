@@ -9,8 +9,8 @@ import (
 	"strings"
 	"text/template"
 
-	"gopkg/tools/service-generator/templatefs"
-	"gopkg/tools/service-generator/utils"
+	"github.com/phanitejak/gopkg/tools/service-generator/templatefs"
+	"github.com/phanitejak/gopkg/tools/service-generator/utils"
 )
 
 var serviceTemplate = templatefs.ServiceTemplate{}

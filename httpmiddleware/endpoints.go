@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"gopkg/logging"
+	"github.com/phanitejak/gopkg/logging"
 )
 
 // This file contains ready made handling of common endpoints, one can use them directly

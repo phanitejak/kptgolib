@@ -13,10 +13,10 @@ import (
 	"time"
 
 	"github.com/go-sql-driver/mysql"
+	"github.com/phanitejak/gopkg/mariadb"
+	"github.com/phanitejak/gopkg/neosql"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gopkg/mariadb"
-	"gopkg/neosql"
 )
 
 // Make sure that AuthRefreshDriver implements the expected interfaces.

@@ -4,9 +4,9 @@ import (
 	"os/exec"
 	"testing"
 
+	"github.com/phanitejak/gopkg/logging/loggingtest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gopkg/logging/loggingtest"
 )
 
 func TestNewTestLogger(t *testing.T) {

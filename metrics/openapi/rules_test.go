@@ -5,7 +5,7 @@ import (
 	"sort"
 	"testing"
 
-	"gopkg/metrics"
+	"github.com/phanitejak/gopkg/metrics"
 
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/stretchr/testify/require"

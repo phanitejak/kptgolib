@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"gopkg/logging/v2/loggingtest"
+	"github.com/phanitejak/gopkg/logging/v2/loggingtest"
 )
 
 func TestStack(t *testing.T) {

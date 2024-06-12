@@ -13,9 +13,9 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
+	"github.com/phanitejak/gopkg/logging"
+	"github.com/phanitejak/gopkg/tracing"
 	"github.com/stretchr/testify/require"
-	"gopkg/logging"
-	"gopkg/tracing"
 )
 
 const (

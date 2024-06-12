@@ -3,8 +3,8 @@ package main
 import (
 	"os"
 
-	"gopkg/logging"
-	"gopkg/tracing"
+	"github.com/phanitejak/gopkg/logging"
+	"github.com/phanitejak/gopkg/tracing"
 )
 
 func main() {

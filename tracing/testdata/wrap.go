@@ -4,9 +4,9 @@ import (
 	"context"
 	"os"
 
-	"gopkg/logging"
+	"github.com/phanitejak/gopkg/logging"
 
-	"gopkg/tracing"
+	"github.com/phanitejak/gopkg/tracing"
 )
 
 func main() {

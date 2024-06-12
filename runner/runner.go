@@ -6,8 +6,8 @@ import (
 	"os"
 	"os/signal"
 
-	"gopkg/logging"
-	"gopkg/tracing"
+	"github.com/phanitejak/gopkg/logging"
+	"github.com/phanitejak/gopkg/tracing"
 )
 
 // exitFn allows overwritting os.Exit for testing purposes.

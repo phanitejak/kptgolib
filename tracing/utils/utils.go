@@ -5,8 +5,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/phanitejak/gopkg/tracing"
 	"go.opentelemetry.io/otel"
-	"gopkg/tracing"
 )
 
 // SpanFromOID is for creating the tracing Span with specified oID as trace ID, operationName as operationName.

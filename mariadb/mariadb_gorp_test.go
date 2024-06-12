@@ -7,10 +7,10 @@ import (
 	"os"
 	"testing"
 
+	"github.com/phanitejak/gopkg/credentialreader"
+	"github.com/phanitejak/gopkg/mariadb"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gopkg/credentialreader"
-	"gopkg/mariadb"
 )
 
 const (

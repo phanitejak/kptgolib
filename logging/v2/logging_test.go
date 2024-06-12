@@ -15,14 +15,14 @@ import (
 	"testing"
 	"time"
 
+	"github.com/phanitejak/gopkg/logging/v2"
+	"github.com/phanitejak/gopkg/logging/v2/testutil"
+	"github.com/phanitejak/gopkg/metrics"
+	"github.com/phanitejak/gopkg/testutils"
+	"github.com/phanitejak/gopkg/tracing"
+	"github.com/phanitejak/gopkg/tracing/tracingtest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gopkg/logging/v2"
-	"gopkg/logging/v2/testutil"
-	"gopkg/metrics"
-	"gopkg/testutils"
-	"gopkg/tracing"
-	"gopkg/tracing/tracingtest"
 )
 
 func ExampleNewLogger_withValidRequestContext() {

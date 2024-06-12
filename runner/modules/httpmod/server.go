@@ -10,8 +10,8 @@ import (
 
 	"github.com/kelseyhightower/envconfig"
 
-	"gopkg/metrics"
-	"gopkg/tracing"
+	"github.com/phanitejak/gopkg/metrics"
+	"github.com/phanitejak/gopkg/tracing"
 )
 
 // Opt can be used to modify servers configuration.

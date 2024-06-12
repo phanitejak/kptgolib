@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/kelseyhightower/envconfig"
+	"github.com/phanitejak/gopkg/tracing"
 	uuid "github.com/satori/go.uuid"
-	"gopkg/tracing"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"

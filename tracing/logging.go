@@ -8,7 +8,7 @@ import (
 
 	"go.opentelemetry.io/otel/trace"
 
-	"gopkg/logging"
+	"github.com/phanitejak/gopkg/logging"
 )
 
 // Logger is wrapping tracing span and logger together

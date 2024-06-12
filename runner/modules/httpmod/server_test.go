@@ -10,10 +10,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"gopkg/logging/loggingtest"
-	"gopkg/metrics"
-	"gopkg/runner/modules/httpmod"
-	"gopkg/tracing"
+	"github.com/phanitejak/gopkg/logging/loggingtest"
+	"github.com/phanitejak/gopkg/metrics"
+	"github.com/phanitejak/gopkg/runner/modules/httpmod"
+	"github.com/phanitejak/gopkg/tracing"
 )
 
 func TestNewServer(t *testing.T) {

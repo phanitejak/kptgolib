@@ -16,8 +16,8 @@ import (
 
 	tracesdk "go.opentelemetry.io/otel/sdk/trace"
 
+	"github.com/phanitejak/gopkg/tracing"
 	"github.com/stretchr/testify/require"
-	"gopkg/tracing"
 )
 
 // SetUp sets tracing related env vars and inits global tracer.

@@ -3,7 +3,7 @@ package metrics
 import (
 	"encoding/json"
 
-	"gopkg/metrics"
+	"github.com/phanitejak/gopkg/metrics"
 )
 
 // Paths content is got from NOM cluster by using command:

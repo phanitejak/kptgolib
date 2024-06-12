@@ -9,8 +9,8 @@ import (
 	"github.com/eapache/go-resiliency/breaker"
 	"github.com/hashicorp/go-retryablehttp"
 	"github.com/hashicorp/vault/api"
+	"github.com/phanitejak/gopkg/logging"
 	"github.com/pkg/errors"
-	"gopkg/logging"
 )
 
 //nolint:gosec

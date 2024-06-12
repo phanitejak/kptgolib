@@ -11,12 +11,12 @@ import (
 	"time"
 
 	"github.com/IBM/sarama"
+	"github.com/phanitejak/gopkg/kafka"
+	"github.com/phanitejak/gopkg/logging/loggingtest"
+	"github.com/phanitejak/gopkg/runner/modules/kafkamod"
+	"github.com/phanitejak/gopkg/tracing"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gopkg/kafka"
-	"gopkg/logging/loggingtest"
-	"gopkg/runner/modules/kafkamod"
-	"gopkg/tracing"
 )
 
 func noopOpt(*kafkamod.Consumer) error { return nil }

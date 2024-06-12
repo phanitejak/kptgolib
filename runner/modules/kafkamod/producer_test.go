@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	"github.com/IBM/sarama"
+	"github.com/phanitejak/gopkg/metrics"
+	"github.com/phanitejak/gopkg/runner/modules/kafkamod"
 	"github.com/stretchr/testify/assert"
-	"gopkg/metrics"
-	"gopkg/runner/modules/kafkamod"
 )
 
 func TestWithProducerEnvConfig_Fail(t *testing.T) {

@@ -9,9 +9,9 @@ import (
 
 	"github.com/go-logr/logr"
 
-	"gopkg/logging"
-	loggingv2 "gopkg/logging/v2"
-	"gopkg/tracing/configuration"
+	"github.com/phanitejak/gopkg/logging"
+	loggingv2 "github.com/phanitejak/gopkg/logging/v2"
+	"github.com/phanitejak/gopkg/tracing/configuration"
 
 	"go.opentelemetry.io/contrib/propagators/jaeger"
 	"go.opentelemetry.io/otel"

@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"github.com/hashicorp/go-multierror"
+	"github.com/phanitejak/gopkg/runner"
 	"github.com/stretchr/testify/assert"
-	"gopkg/runner"
 )
 
 type constError string

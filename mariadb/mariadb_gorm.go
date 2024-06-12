@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"time"
 
-	"gopkg/credentialreader"
-	"gopkg/gerror"
-	"gopkg/logging"
-	"gopkg/neosql"
-	"gopkg/tracing"
+	"github.com/phanitejak/gopkg/credentialreader"
+	"github.com/phanitejak/gopkg/gerror"
+	"github.com/phanitejak/gopkg/logging"
+	"github.com/phanitejak/gopkg/neosql"
+	"github.com/phanitejak/gopkg/tracing"
 
 	"github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"

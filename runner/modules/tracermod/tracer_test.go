@@ -3,11 +3,11 @@ package tracermod_test
 import (
 	"testing"
 
+	"github.com/phanitejak/gopkg/logging/loggingtest"
+	"github.com/phanitejak/gopkg/runner/modules/tracermod"
+	"github.com/phanitejak/gopkg/tracing"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gopkg/logging/loggingtest"
-	"gopkg/runner/modules/tracermod"
-	"gopkg/tracing"
 )
 
 func TestNewGlobalTracer(t *testing.T) {

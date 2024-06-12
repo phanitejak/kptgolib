@@ -9,10 +9,10 @@ import (
 	"go.opentelemetry.io/otel/attribute"
 
 	"github.com/IBM/sarama"
+	"github.com/phanitejak/gopkg/tracing"
+	"github.com/phanitejak/gopkg/tracing/tracingtest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gopkg/tracing"
-	"gopkg/tracing/tracingtest"
 )
 
 func TestStartSpanFromMessageCheckProcessor(t *testing.T) {

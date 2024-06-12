@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
+	"github.com/phanitejak/gopkg/tracing"
 	"github.com/stretchr/testify/assert"
-	"gopkg/tracing"
 )
 
 func TestRunAppSuccess(t *testing.T) {

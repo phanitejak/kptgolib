@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"testing"
 
-	"gopkg/logging"
+	"github.com/phanitejak/gopkg/logging"
 )
 
 var log = logging.NewLogger()

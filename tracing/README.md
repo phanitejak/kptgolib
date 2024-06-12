@@ -27,7 +27,7 @@ Add this monorepo to your go.mod file and you will be able to import needed trac
 
 ```go
 import(
-	"gopkg/tracing"
+	"github.com/phanitejak/gopkg/tracing"
 )
 ```
 

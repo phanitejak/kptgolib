@@ -13,11 +13,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/phanitejak/gopkg/logging"
+	"github.com/phanitejak/gopkg/logging/testutil"
+	"github.com/phanitejak/gopkg/metrics"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gopkg/logging"
-	"gopkg/logging/testutil"
-	"gopkg/metrics"
 )
 
 func ExampleNewLogger_basic() {

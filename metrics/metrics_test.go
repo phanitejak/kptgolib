@@ -18,10 +18,10 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
+	"github.com/phanitejak/gopkg/metrics"
 	gometrics "github.com/rcrowley/go-metrics"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gopkg/metrics"
 )
 
 const plainMetricNameKey = "_plain_metric_name"

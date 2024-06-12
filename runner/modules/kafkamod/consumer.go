@@ -10,8 +10,8 @@ import (
 	"github.com/IBM/sarama"
 	"github.com/hashicorp/go-multierror"
 	"github.com/kelseyhightower/envconfig"
-	"gopkg/metrics"
-	"gopkg/tracing"
+	"github.com/phanitejak/gopkg/metrics"
+	"github.com/phanitejak/gopkg/tracing"
 )
 
 // ConsumerConfig for consumer.
