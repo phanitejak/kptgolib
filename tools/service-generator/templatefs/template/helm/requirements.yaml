@@ -1,4 +1,0 @@
-dependencies:
-  - name: helper-chart
-    version: 0.1.x
-    repository: https://repo.cci.nokia.net/neo-helm-releases
