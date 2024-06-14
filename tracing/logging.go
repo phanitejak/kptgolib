@@ -131,6 +131,10 @@ func NewLogger(logger logging.Logger) *Logger {
 	return &Logger{Logger: logger}
 }
 
+func NewDefaultLogger() *Logger {
+	return NewLogger(logging.NewLogger())
+}
+
 // TracerErrorHandler ...
 type TracerErrorHandler struct {
 	log logr.Logger
