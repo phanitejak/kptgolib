@@ -53,6 +53,21 @@ func (t TestLogger) Infof(msg string, args ...interface{}) {
 	t.t.Logf(t.formatf(msg, args...))
 }
 
+// Warn is logging arguments using t.Log.
+func (t TestLogger) Warn(args ...interface{}) {
+	t.t.Log(t.format(args...))
+}
+
+// Warnln is logging arguments using t.Log.
+func (t TestLogger) Warnln(args ...interface{}) {
+	t.t.Log(t.format(args...))
+}
+
+// Warnf is logging arguments using t.Logf.
+func (t TestLogger) Warnf(msg string, args ...interface{}) {
+	t.t.Logf(t.formatf(msg, args...))
+}
+
 // Error is logging arguments using t.Log instead of t.Error in case error level logging is expected.
 func (t TestLogger) Error(args ...interface{}) {
 	t.t.Log(t.format(args...))

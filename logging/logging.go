@@ -41,6 +41,10 @@ type Logger interface {
 	Fatal(...interface{})
 	Fatalln(...interface{})
 	Fatalf(string, ...interface{})
+
+	Warn(...interface{})
+	Warnln(...interface{})
+	Warnf(string, ...interface{})
 }
 
 // StdLogger is the interface which allows us to use Logger with Print methods.
@@ -147,6 +151,21 @@ func (l logger) Fatalf(format string, args ...interface{}) {
 	exit(1)
 }
 
+// Warn logs a message at level Warn on the standard logger.
+func (l logger) Warn(args ...interface{}) {
+	l.sourced(l.depth).Warn(args...)
+}
+
+// Warnln logs a message at level Warn on the standard logger.
+func (l logger) Warnln(args ...interface{}) {
+	l.sourced(l.depth).Warnln(args...)
+}
+
+// Warnf logs a message at level Warn on the standard logger.
+func (l logger) Warnf(format string, args ...interface{}) {
+	l.sourced(l.depth).Warnf(format, args...)
+}
+
 // sourced adds a source field to the logger that contains
 // the file name and line where the logging happened.
 func (l logger) sourced(depth int) *logrus.Entry {
@@ -178,21 +197,22 @@ func PrivacyDataFormatter(sensitiveData string) string {
 // with Neo logging standards, configuration can be changed with
 // environment variables as follows:
 //
-//  Variable            | Values
-//  -----------------------------------------------------------
-//  LOGGING_LEVEL       | 'debug', 'info' (default), 'error'
-//  LOGGING_FORMAT      | 'json' (default), 'txt'
+//	Variable            | Values
+//	-----------------------------------------------------------
+//	LOGGING_LEVEL       | 'debug', 'info' (default), 'error'
+//	LOGGING_FORMAT      | 'json' (default), 'txt'
 //
 // If invalid configuration is given NewLogger will return Logger
 // with default configuration and handle error by logging it.
 // Log events contains following fields by default:
-//  timestamp
-//  message
-//  logger
-//  level
-//  stack_trace (only in 'error' level)
 //
-// Log metrics
+//	timestamp
+//	message
+//	logger
+//	level
+//	stack_trace (only in 'error' level)
+//
+// # Log metrics
 //
 // Logger will automatically collect metrics (log event counters) for Prometheus.
 // Metrics will be exposed only if you run metrics.ManagementServer in your application.

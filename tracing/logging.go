@@ -111,6 +111,21 @@ func (l *Logger) Fatalf(format string, args ...interface{}) {
 	l.Logger.Fatalf(format, args...)
 }
 
+// Warn logs a message at level Warn.
+func (l *Logger) Warn(args ...interface{}) {
+	l.Logger.Warn(args...)
+}
+
+// Warnln logs a message at level Warn.
+func (l *Logger) Warnln(args ...interface{}) {
+	l.Logger.Warnln(args...)
+}
+
+// Warnf logs a message at level Warn.
+func (l *Logger) Warnf(format string, args ...interface{}) {
+	l.Logger.Warnf(format, args...)
+}
+
 func (l *Logger) addErrorTagIfSpanExists() {
 	if l.span == nil {
 		return
