@@ -28,18 +28,18 @@ func (l logrLoggerAdapter) WithName(_ string) logr.LogSink {
 }
 
 // Error logs error
-func (l logrLoggerAdapter) Error(err error, msg string, keysAndValues ...interface{}) {
+func (l logrLoggerAdapter) Error(err error, msg string, keysAndValues ...any) {
 	l.WithValues(keysAndValues...).(logrLoggerAdapter).logger.Error(context.Background(), fmt.Sprintf("%s: %s", msg, err))
 }
 
 // Info logs info
-func (l logrLoggerAdapter) Info(_ int, msg string, keysAndValues ...interface{}) {
+func (l logrLoggerAdapter) Info(_ int, msg string, keysAndValues ...any) {
 	l.WithValues(keysAndValues...).(logrLoggerAdapter).logger.Info(msg)
 }
 
-func (l logrLoggerAdapter) WithValues(keysAndValues ...interface{}) logr.LogSink {
+func (l logrLoggerAdapter) WithValues(keysAndValues ...any) logr.LogSink {
 	key := ""
-	var value interface{}
+	var value any
 	for i, kv := range keysAndValues {
 		if i%2 == 0 {
 			_, ok := kv.(string)
@@ -49,7 +49,7 @@ func (l logrLoggerAdapter) WithValues(keysAndValues ...interface{}) logr.LogSink
 			key = kv.(string)
 		} else {
 			value = kv
-			v, ok := value.(interface{ MarshalLog() interface{} })
+			v, ok := value.(interface{ MarshalLog() any })
 			if ok {
 				value = v.MarshalLog()
 			}
@@ -78,18 +78,18 @@ func (l logrV2LoggerAdapter) WithName(_ string) logr.LogSink {
 }
 
 // Error logs error
-func (l logrV2LoggerAdapter) Error(err error, msg string, keysAndValues ...interface{}) {
+func (l logrV2LoggerAdapter) Error(err error, msg string, keysAndValues ...any) {
 	l.WithValues(keysAndValues...).(logrV2LoggerAdapter).logger.Error(context.Background(), fmt.Sprintf("%s: %s", msg, err))
 }
 
 // Info logs info
-func (l logrV2LoggerAdapter) Info(_ int, msg string, keysAndValues ...interface{}) {
+func (l logrV2LoggerAdapter) Info(_ int, msg string, keysAndValues ...any) {
 	l.WithValues(keysAndValues...).(logrV2LoggerAdapter).logger.Info(context.Background(), msg)
 }
 
-func (l logrV2LoggerAdapter) WithValues(keysAndValues ...interface{}) logr.LogSink {
+func (l logrV2LoggerAdapter) WithValues(keysAndValues ...any) logr.LogSink {
 	key := ""
-	var value interface{}
+	var value any
 	for i, kv := range keysAndValues {
 		if i%2 == 0 {
 			_, ok := kv.(string)
@@ -99,7 +99,7 @@ func (l logrV2LoggerAdapter) WithValues(keysAndValues ...interface{}) logr.LogSi
 			key = kv.(string)
 		} else {
 			value = kv
-			v, ok := value.(interface{ MarshalLog() interface{} })
+			v, ok := value.(interface{ MarshalLog() any })
 			if ok {
 				value = v.MarshalLog()
 			}

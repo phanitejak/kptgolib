@@ -46,83 +46,83 @@ func (l *Logger) For(context context.Context) *Logger {
 }
 
 // Debug logs a message at level Debug.
-func (l *Logger) Debug(args ...interface{}) {
+func (l *Logger) Debug(args ...any) {
 	l.Logger.Debug(args...)
 }
 
 // Debugln logs a message at level Debug.
-func (l *Logger) Debugln(args ...interface{}) {
+func (l *Logger) Debugln(args ...any) {
 	l.Logger.Debugln(args...)
 }
 
 // Debugf logs a message at level Debug.
-func (l *Logger) Debugf(format string, args ...interface{}) {
+func (l *Logger) Debugf(format string, args ...any) {
 	l.Logger.Debugf(format, args...)
 }
 
 // Info logs a message at level Info.
-func (l *Logger) Info(args ...interface{}) {
+func (l *Logger) Info(args ...any) {
 	l.Logger.Info(args...)
 }
 
 // Infoln logs a message at level Info.
-func (l *Logger) Infoln(args ...interface{}) {
+func (l *Logger) Infoln(args ...any) {
 	l.Logger.Infoln(args...)
 }
 
 // Infof logs a message at level Info.
-func (l *Logger) Infof(format string, args ...interface{}) {
+func (l *Logger) Infof(format string, args ...any) {
 	l.Logger.Infof(format, args...)
 }
 
 // Error logs the error
-func (l *Logger) Error(args ...interface{}) {
+func (l *Logger) Error(args ...any) {
 	l.addErrorTagIfSpanExists()
 	l.Logger.Error(args...)
 }
 
 // Errorln logs the error
-func (l *Logger) Errorln(args ...interface{}) {
+func (l *Logger) Errorln(args ...any) {
 	l.addErrorTagIfSpanExists()
 	l.Logger.Errorln(args...)
 }
 
 // Errorf logs the error
-func (l *Logger) Errorf(format string, args ...interface{}) {
+func (l *Logger) Errorf(format string, args ...any) {
 	l.addErrorTagIfSpanExists()
 	l.Logger.Errorf(format, args...)
 }
 
 // Fatal logs error and exits
-func (l *Logger) Fatal(args ...interface{}) {
+func (l *Logger) Fatal(args ...any) {
 	l.addErrorTagIfSpanExists()
 	l.Logger.Fatal(args...)
 }
 
 // Fatalln logs error and exits
-func (l *Logger) Fatalln(args ...interface{}) {
+func (l *Logger) Fatalln(args ...any) {
 	l.addErrorTagIfSpanExists()
 	l.Logger.Fatalln(args...)
 }
 
 // Fatalf logs error and exits
-func (l *Logger) Fatalf(format string, args ...interface{}) {
+func (l *Logger) Fatalf(format string, args ...any) {
 	l.addErrorTagIfSpanExists()
 	l.Logger.Fatalf(format, args...)
 }
 
 // Warn logs a message at level Warn.
-func (l *Logger) Warn(args ...interface{}) {
+func (l *Logger) Warn(args ...any) {
 	l.Logger.Warn(args...)
 }
 
 // Warnln logs a message at level Warn.
-func (l *Logger) Warnln(args ...interface{}) {
+func (l *Logger) Warnln(args ...any) {
 	l.Logger.Warnln(args...)
 }
 
 // Warnf logs a message at level Warn.
-func (l *Logger) Warnf(format string, args ...interface{}) {
+func (l *Logger) Warnf(format string, args ...any) {
 	l.Logger.Warnf(format, args...)
 }
 

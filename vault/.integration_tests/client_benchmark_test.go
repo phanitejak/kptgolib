@@ -18,7 +18,7 @@ func BenchmarkList(b *testing.B) {
 	defer cleanupFunc()
 
 	secretPath := "cubbyhole/secret"
-	secretData := map[string]interface{}{"key": "value"}
+	secretData := map[string]any{"key": "value"}
 	ourClient.Write(secretPath, secretData)
 
 	b.Run("BuiltInClient", func(b *testing.B) {
@@ -53,7 +53,7 @@ func BenchmarkRead(b *testing.B) {
 	defer cleanupFunc()
 
 	secretPath := "cubbyhole/secret"
-	secretData := map[string]interface{}{"key": "value"}
+	secretData := map[string]any{"key": "value"}
 	ourClient.Write(secretPath, secretData)
 
 	b.Run("BuiltInClient", func(b *testing.B) {
@@ -88,7 +88,7 @@ func BenchmarkWrite(b *testing.B) {
 	defer cleanupFunc()
 
 	secretPath := "cubbyhole/secret"
-	secretData := map[string]interface{}{"key": "value"}
+	secretData := map[string]any{"key": "value"}
 	ourClient.Write(secretPath, secretData)
 
 	b.Run("BuiltInClient", func(b *testing.B) {
@@ -123,7 +123,7 @@ func BenchmarkDelete(b *testing.B) {
 	defer cleanupFunc()
 
 	secretPath := "cubbyhole/secret"
-	secretData := map[string]interface{}{"key": "value"}
+	secretData := map[string]any{"key": "value"}
 	ourClient.Write(secretPath, secretData)
 
 	b.Run("BuiltInClient", func(b *testing.B) {

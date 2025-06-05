@@ -29,7 +29,7 @@ import (
 const stackSize = 4096
 
 // A Tag represents an error identifier of any type.
-type Tag interface{}
+type Tag any
 
 // A Gerror is a tagged error with a stack trace embedded in the Error() string.
 type Gerror interface {
@@ -60,7 +60,7 @@ func New(tag Tag, message string) Gerror {
 }
 
 // Newf Returns an error containing the given tag and format string and the current stack trace. The given inserts are applied to the format string to produce an error message.
-func Newf(tag Tag, format string, insert ...interface{}) Gerror {
+func Newf(tag Tag, format string, insert ...any) Gerror {
 	return New(tag, fmt.Sprintf(format, insert...))
 }
 

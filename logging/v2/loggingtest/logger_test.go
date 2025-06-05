@@ -25,7 +25,7 @@ func TestNewTestLogger(t *testing.T) {
 	logger.Errorf(context.Background(), "%s", "message")
 
 	logger.With("key", "value").Info(context.Background(), "message")
-	logger.WithFields(map[string]interface{}{"key": "value"}).Info(context.Background(), "message")
+	logger.WithFields(map[string]any{"key": "value"}).Info(context.Background(), "message")
 }
 
 func TestLoggingFatal(t *testing.T) {

@@ -60,7 +60,7 @@ func ExampleNewLogger_with() {
 
 func ExampleNewLogger_withCustomInterfaceFields() {
 	log := logging.NewLogger()
-	fields := map[string]interface{}{
+	fields := map[string]any{
 		"trace_id": 12345,
 		"user_id":  "haapis",
 		"origin":   "127.0.0.1",
@@ -126,7 +126,7 @@ func TestWithFields(t *testing.T) {
 	expectedLevel := "error"
 	expectedMessage := "This is error"
 	expectedContext := "test"
-	newFields := map[string]interface{}{
+	newFields := map[string]any{
 		"context":    "test",
 		"tracker_id": "1",
 	}

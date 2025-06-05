@@ -116,7 +116,7 @@ func TestShouldPreserveOrder(t *testing.T) {
 	v.WhenRead("first/read/request").ThenReturn(&api.Secret{RequestID: "first read request"})
 	v.WhenList("first/read").ThenReturn(&api.Secret{RequestID: "list of keys"})
 
-	dataToWrite := make(map[string]interface{})
+	dataToWrite := make(map[string]any)
 	dataToWrite["first_key"] = "first_value"
 
 	v.WhenWrite("first/write/request", dataToWrite).ThenError(errors.New("first write error"))

@@ -40,7 +40,7 @@ func GetSwaggerJSON(fnc GetSwaggerFnc) ([]byte, error) {
 
 // GetApiDocsV2 serves /api-docs
 // nolint
-func GetApiDocsV2(w http.ResponseWriter, apiGetSwaggerFn GetSwaggerFnc, logFatal func(string, ...interface{})) {
+func GetApiDocsV2(w http.ResponseWriter, apiGetSwaggerFn GetSwaggerFnc, logFatal func(string, ...any)) {
 	swaggerJSON, err := GetSwaggerJSON(apiGetSwaggerFn)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -50,7 +50,7 @@ func GetApiDocsV2(w http.ResponseWriter, apiGetSwaggerFn GetSwaggerFnc, logFatal
 	writeAPIDocs(w, swaggerJSON, logFatal)
 }
 
-func writeAPIDocs(w http.ResponseWriter, swaggerJSON []byte, logErrorf func(string, ...interface{})) {
+func writeAPIDocs(w http.ResponseWriter, swaggerJSON []byte, logErrorf func(string, ...any)) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	_, err := w.Write(swaggerJSON)

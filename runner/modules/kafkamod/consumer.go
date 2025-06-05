@@ -219,7 +219,7 @@ func (h *handlerWrapper) Cleanup(session sarama.ConsumerGroupSession) error {
 
 // ConsumeClaim must start a consumer loop of ConsumerGroupClaim's Messages().
 func (h *handlerWrapper) ConsumeClaim(session sarama.ConsumerGroupSession, claim sarama.ConsumerGroupClaim) error {
-	l := h.log.WithFields(map[string]interface{}{
+	l := h.log.WithFields(map[string]any{
 		"topic":         claim.Topic(),
 		"partition":     claim.Partition(),
 		"initialoffset": claim.InitialOffset(),

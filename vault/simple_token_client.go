@@ -31,7 +31,7 @@ func (c *simpleTokenClient) Read(path string) (secret *api.Secret, err error) {
 	return c.vaultClient.Logical().Read(path)
 }
 
-func (c *simpleTokenClient) Write(path string, data map[string]interface{}) (secret *api.Secret, err error) {
+func (c *simpleTokenClient) Write(path string, data map[string]any) (secret *api.Secret, err error) {
 	return c.vaultClient.Logical().Write(path, data)
 }
 

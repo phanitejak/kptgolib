@@ -49,8 +49,8 @@ func TestLogrAdapterV1(t *testing.T) {
 	logsv1 := logr.New(loggerv1)
 	logsv2 := logr.New(loggerv2)
 
-	kvWithOne := []interface{}{"test-key-1", "test-val-1"}
-	kvWithTwo := []interface{}{"test-key-1", "test-val-1", "test-key-2", "test-val-2"}
+	kvWithOne := []any{"test-key-1", "test-val-1"}
+	kvWithTwo := []any{"test-key-1", "test-val-1", "test-key-2", "test-val-2"}
 
 	logsv1.Info("Test message", kvWithOne...)
 	logsv1.Info("Test message", kvWithTwo...)

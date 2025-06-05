@@ -79,12 +79,12 @@ func TestMiddleware(t *testing.T) {
 	tests := []struct {
 		name                       string
 		options                    []func(conf) (conf, error)
-		givenKey                   interface{}
+		givenKey                   any
 		authHeader                 string
-		expectedResponseBody       interface{}
+		expectedResponseBody       any
 		expectedResponseStatusCode int
 		expectTokenStoredInContext bool
-		assertValue                func(t *testing.T, value interface{})
+		assertValue                func(t *testing.T, value any)
 	}{
 		{
 			name:                       "with defaults",
@@ -93,7 +93,7 @@ func TestMiddleware(t *testing.T) {
 			authHeader:                 "",
 			expectedResponseBody:       "no Authorization header found in request",
 			expectedResponseStatusCode: http.StatusBadRequest,
-			assertValue: func(t *testing.T, value interface{}) {
+			assertValue: func(t *testing.T, value any) {
 				assert.Nil(t, value)
 			},
 			expectTokenStoredInContext: false,
@@ -105,7 +105,7 @@ func TestMiddleware(t *testing.T) {
 			authHeader:                 "Bearer invalid_jwt",
 			expectedResponseBody:       "failed to decode a bearer token",
 			expectedResponseStatusCode: http.StatusBadRequest,
-			assertValue: func(t *testing.T, value interface{}) {
+			assertValue: func(t *testing.T, value any) {
 				assert.Nil(t, value)
 			},
 			expectTokenStoredInContext: false,
@@ -117,7 +117,7 @@ func TestMiddleware(t *testing.T) {
 			authHeader:                 "Bearer ignored_header_value..ignored_signature",
 			expectedResponseBody:       "token is not a valid json",
 			expectedResponseStatusCode: http.StatusBadRequest,
-			assertValue: func(t *testing.T, value interface{}) {
+			assertValue: func(t *testing.T, value any) {
 				assert.Nil(t, value)
 			},
 			expectTokenStoredInContext: false,
@@ -131,7 +131,7 @@ func TestMiddleware(t *testing.T) {
 			authHeader:                 "Bearer ignored_header_value..ignored_signature",
 			expectedResponseBody:       "",
 			expectedResponseStatusCode: http.StatusOK,
-			assertValue: func(t *testing.T, value interface{}) {
+			assertValue: func(t *testing.T, value any) {
 				assert.Nil(t, value)
 			},
 			expectTokenStoredInContext: false,
@@ -141,7 +141,7 @@ func TestMiddleware(t *testing.T) {
 			options: []func(conf) (conf, error){
 				WithErrorHandler(func(w http.ResponseWriter, r *http.Request, err error) {
 					w.WriteHeader(http.StatusUnauthorized)
-					b, _ := json.Marshal(map[string]interface{}{
+					b, _ := json.Marshal(map[string]any{
 						"error": err.Error(),
 					})
 					_, _ = w.Write(b)
@@ -151,7 +151,7 @@ func TestMiddleware(t *testing.T) {
 			authHeader:                 "Bearer invalid_jwt",
 			expectedResponseBody:       `{"error":"failed to decode a bearer token"}`,
 			expectedResponseStatusCode: http.StatusUnauthorized,
-			assertValue: func(t *testing.T, value interface{}) {
+			assertValue: func(t *testing.T, value any) {
 				assert.Nil(t, value)
 			},
 			expectTokenStoredInContext: false,
@@ -161,19 +161,19 @@ func TestMiddleware(t *testing.T) {
 			options: []func(conf) (conf, error){
 				WithErrorHandler(func(w http.ResponseWriter, r *http.Request, err error) {
 					w.WriteHeader(http.StatusUnauthorized)
-					b, _ := json.Marshal(map[string]interface{}{
+					b, _ := json.Marshal(map[string]any{
 						"error": err.Error(),
 					})
 					_, _ = w.Write(b)
 				}),
-				WithClaimsToExtract(map[string]interface{}{"non.existing.json.path": otherKey}),
+				WithClaimsToExtract(map[string]any{"non.existing.json.path": otherKey}),
 				WithStoredTokenInContext(tokenContextKey),
 			},
 			givenKey:                   "some_claim",
 			authHeader:                 "Bearer ignored." + base64.RawURLEncoding.EncodeToString([]byte(`{"some_claim": "some_value"}`)) + ".ignored",
 			expectedResponseBody:       `{"error":"expected claim does not exist in the token"}`,
 			expectedResponseStatusCode: http.StatusUnauthorized,
-			assertValue: func(t *testing.T, value interface{}) {
+			assertValue: func(t *testing.T, value any) {
 				assert.Nil(t, value)
 			},
 			expectTokenStoredInContext: true,
@@ -181,14 +181,14 @@ func TestMiddleware(t *testing.T) {
 		{
 			name: "with other non existing claims",
 			options: []func(conf) (conf, error){
-				WithClaimsToExtract(map[string]interface{}{"non.existing.json.path": otherKey}),
+				WithClaimsToExtract(map[string]any{"non.existing.json.path": otherKey}),
 				WithStoredTokenInContext(tokenContextKey),
 			},
 			givenKey:                   "some_other_claim",
 			authHeader:                 "Bearer ignored." + base64.RawURLEncoding.EncodeToString([]byte(`{"some_claim": "some_value"}`)) + ".ignored",
 			expectedResponseBody:       `expected claim does not exist in the token`,
 			expectedResponseStatusCode: http.StatusBadRequest,
-			assertValue: func(t *testing.T, value interface{}) {
+			assertValue: func(t *testing.T, value any) {
 				assert.Nil(t, value)
 			},
 			expectTokenStoredInContext: true,
@@ -196,18 +196,18 @@ func TestMiddleware(t *testing.T) {
 		{
 			name: "with existing claims",
 			options: []func(conf) (conf, error){
-				WithClaimsToExtract(map[string]interface{}{"resource_access.UM_SCOPE_WorkingSets.roles": scopesKey}),
+				WithClaimsToExtract(map[string]any{"resource_access.UM_SCOPE_WorkingSets.roles": scopesKey}),
 				WithStoredTokenInContext(tokenContextKey),
 			},
 			givenKey:                   scopesKey,
 			authHeader:                 "Bearer ignored." + base64.RawURLEncoding.EncodeToString([]byte(jwtPayloadJSON)) + ".ignored",
 			expectedResponseBody:       "",
 			expectedResponseStatusCode: http.StatusOK,
-			assertValue: func(t *testing.T, value interface{}) {
+			assertValue: func(t *testing.T, value any) {
 				require.NotNil(t, value)
 
 				var actual []string
-				for _, v := range value.([]interface{}) {
+				for _, v := range value.([]any) {
 					actual = append(actual, v.(string))
 				}
 
@@ -218,17 +218,17 @@ func TestMiddleware(t *testing.T) {
 		{
 			name: "with single claim im the list",
 			options: []func(conf) (conf, error){
-				WithClaimsToExtract(map[string]interface{}{"resource_access.UM_SCOPE_WorkingSets.roles": scopesKey}),
+				WithClaimsToExtract(map[string]any{"resource_access.UM_SCOPE_WorkingSets.roles": scopesKey}),
 			},
 			givenKey:                   scopesKey,
 			authHeader:                 "Bearer ignored." + base64.RawURLEncoding.EncodeToString([]byte(jwtSingleClaimPayloadJSON)) + ".ignored",
 			expectedResponseBody:       "",
 			expectedResponseStatusCode: http.StatusOK,
-			assertValue: func(t *testing.T, value interface{}) {
+			assertValue: func(t *testing.T, value any) {
 				require.NotNil(t, value)
 
 				var actual []string
-				for _, v := range value.([]interface{}) {
+				for _, v := range value.([]any) {
 					actual = append(actual, v.(string))
 				}
 
@@ -239,18 +239,18 @@ func TestMiddleware(t *testing.T) {
 		{
 			name: "with empty claim list",
 			options: []func(conf) (conf, error){
-				WithClaimsToExtract(map[string]interface{}{"resource_access.UM_SCOPE_WorkingSets.roles": scopesKey}),
+				WithClaimsToExtract(map[string]any{"resource_access.UM_SCOPE_WorkingSets.roles": scopesKey}),
 				WithStoredTokenInContext(tokenContextKey),
 			},
 			givenKey:                   scopesKey,
 			authHeader:                 "Bearer ignored." + base64.RawURLEncoding.EncodeToString([]byte(jwtEmptyClaimListPayloadJSON)) + ".ignored",
 			expectedResponseBody:       "",
 			expectedResponseStatusCode: http.StatusOK,
-			assertValue: func(t *testing.T, value interface{}) {
+			assertValue: func(t *testing.T, value any) {
 				require.NotNil(t, value)
 
 				var actual []string
-				for _, v := range value.([]interface{}) {
+				for _, v := range value.([]any) {
 					actual = append(actual, v.(string))
 				}
 
@@ -261,17 +261,17 @@ func TestMiddleware(t *testing.T) {
 		{
 			name: "with lower case Bearer string",
 			options: []func(conf) (conf, error){
-				WithClaimsToExtract(map[string]interface{}{"resource_access.UM_SCOPE_WorkingSets.roles": scopesKey}),
+				WithClaimsToExtract(map[string]any{"resource_access.UM_SCOPE_WorkingSets.roles": scopesKey}),
 			},
 			givenKey:                   scopesKey,
 			authHeader:                 "bearer ignored." + base64.RawURLEncoding.EncodeToString([]byte(jwtPayloadJSON)) + ".ignored",
 			expectedResponseBody:       "",
 			expectedResponseStatusCode: http.StatusOK,
-			assertValue: func(t *testing.T, value interface{}) {
+			assertValue: func(t *testing.T, value any) {
 				require.NotNil(t, value)
 
 				var actual []string
-				for _, v := range value.([]interface{}) {
+				for _, v := range value.([]any) {
 					actual = append(actual, v.(string))
 				}
 
@@ -282,7 +282,7 @@ func TestMiddleware(t *testing.T) {
 		{
 			name: "with RS256 signature verification",
 			options: []func(conf) (conf, error){
-				WithClaimsToExtract(map[string]interface{}{"resource_access.UM_SCOPE_WorkingSets.roles": scopesKey}),
+				WithClaimsToExtract(map[string]any{"resource_access.UM_SCOPE_WorkingSets.roles": scopesKey}),
 				WithCertificatePem(certPem),
 				func(c conf) (conf, error) {
 					c.signatureVerificationIsEnabled = true
@@ -293,10 +293,10 @@ func TestMiddleware(t *testing.T) {
 			authHeader:                 fmt.Sprintf("bearer %s", jwtStringSigned),
 			expectedResponseBody:       "",
 			expectedResponseStatusCode: http.StatusOK,
-			assertValue: func(t *testing.T, value interface{}) {
+			assertValue: func(t *testing.T, value any) {
 				require.NotNil(t, value)
 				var actual []string
-				for _, v := range value.([]interface{}) {
+				for _, v := range value.([]any) {
 					actual = append(actual, v.(string))
 				}
 

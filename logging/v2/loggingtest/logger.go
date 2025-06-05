@@ -25,72 +25,72 @@ func NewTestLogger(t *testing.T) logging.Logger {
 }
 
 // Debug is logging arguments using t.Log.
-func (t TestLogger) Debug(_ context.Context, args ...interface{}) {
+func (t TestLogger) Debug(_ context.Context, args ...any) {
 	t.t.Log(t.format(args...))
 }
 
 // Debugln is logging arguments using t.Log.
-func (t TestLogger) Debugln(_ context.Context, args ...interface{}) {
+func (t TestLogger) Debugln(_ context.Context, args ...any) {
 	t.t.Log(t.format(args...))
 }
 
 // Debugf is logging arguments using t.Logf.
-func (t TestLogger) Debugf(_ context.Context, msg string, args ...interface{}) {
+func (t TestLogger) Debugf(_ context.Context, msg string, args ...any) {
 	t.t.Logf(t.formatf(msg, args...))
 }
 
 // Info is logging arguments using t.Log.
-func (t TestLogger) Info(_ context.Context, args ...interface{}) {
+func (t TestLogger) Info(_ context.Context, args ...any) {
 	t.t.Log(t.format(args...))
 }
 
 // Infoln is logging arguments using t.Log.
-func (t TestLogger) Infoln(_ context.Context, args ...interface{}) {
+func (t TestLogger) Infoln(_ context.Context, args ...any) {
 	t.t.Log(t.format(args...))
 }
 
 // Infof is logging arguments using t.Logf.
-func (t TestLogger) Infof(_ context.Context, msg string, args ...interface{}) {
+func (t TestLogger) Infof(_ context.Context, msg string, args ...any) {
 	t.t.Logf(t.formatf(msg, args...))
 }
 
 // Error is logging arguments using t.Log instead of t.Error in case error level logging is expected.
-func (t TestLogger) Error(_ context.Context, args ...interface{}) {
+func (t TestLogger) Error(_ context.Context, args ...any) {
 	t.t.Log(t.format(args...))
 }
 
 // Errorln is logging arguments using t.Log instead of t.Error in case error level logging is expected.
-func (t TestLogger) Errorln(_ context.Context, args ...interface{}) {
+func (t TestLogger) Errorln(_ context.Context, args ...any) {
 	t.t.Log(t.format(args...))
 }
 
 // Errorf is logging arguments using t.Logf instead of t.Errorf in case error level logging is expected.
-func (t TestLogger) Errorf(_ context.Context, msg string, args ...interface{}) {
+func (t TestLogger) Errorf(_ context.Context, msg string, args ...any) {
 	t.t.Logf(t.formatf(msg, args...))
 }
 
 // With is not supported for test logger.
-func (t TestLogger) With(_ string, _ interface{}) logging.Logger {
+func (t TestLogger) With(_ string, _ any) logging.Logger {
 	return t
 }
 
 // WithFields is not supported for test logger.
-func (t TestLogger) WithFields(_ map[string]interface{}) logging.Logger {
+func (t TestLogger) WithFields(_ map[string]any) logging.Logger {
 	return t
 }
 
 // Fatal is logging arguments using t.Fatal.
-func (t TestLogger) Fatal(_ context.Context, args ...interface{}) {
+func (t TestLogger) Fatal(_ context.Context, args ...any) {
 	t.t.Fatal(t.format(args...))
 }
 
 // Fatalln is logging arguments using t.Fatal.
-func (t TestLogger) Fatalln(_ context.Context, args ...interface{}) {
+func (t TestLogger) Fatalln(_ context.Context, args ...any) {
 	t.t.Fatal(t.format(args...))
 }
 
 // Fatalf is logging arguments  using t.Fatalf.
-func (t TestLogger) Fatalf(_ context.Context, msg string, args ...interface{}) {
+func (t TestLogger) Fatalf(_ context.Context, msg string, args ...any) {
 	t.t.Fatalf(t.formatf(msg, args...))
 }
 
@@ -100,12 +100,12 @@ func (t TestLogger) IncDepth(depth int) logging.Logger {
 	return t
 }
 
-func (t TestLogger) format(args ...interface{}) string {
+func (t TestLogger) format(args ...any) string {
 	i := t.source()
 	return "\n" + i + ": " + fmt.Sprint(args...)
 }
 
-func (t TestLogger) formatf(msg string, args ...interface{}) string {
+func (t TestLogger) formatf(msg string, args ...any) string {
 	i := t.source()
 	return "\n" + i + ": " + fmt.Sprintf(msg, args...)
 }

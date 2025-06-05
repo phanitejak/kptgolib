@@ -28,7 +28,7 @@ var ErrDataNotFound = ErrEmptyValue("Data not found error")
 
 type valueWrapper struct {
 	err   error
-	value interface{}
+	value any
 }
 
 // NewDefault instantiates the cache with given expiration time for key and cleanup duration of 2x expiration.
@@ -44,14 +44,14 @@ func New(cache *cache.Cache) *ECache {
 }
 
 // SetIfData sets the key in cache only if err is nil or it is of type ErrEmptyValue.
-func (c *ECache) SetIfData(key string, value interface{}, err error) {
+func (c *ECache) SetIfData(key string, value any, err error) {
 	if err == nil || IsErrEmptyValueType(err) {
 		c.cache.Set(key, valueWrapper{err: err, value: value}, cache.DefaultExpiration)
 	}
 }
 
 // Get gets the value and its associated error for given key, and found is true. If there was no such key in cache, value and err are nil and found is false.
-func (c *ECache) Get(key string) (value interface{}, found bool, err error) {
+func (c *ECache) Get(key string) (value any, found bool, err error) {
 	data, found := c.cache.Get(key)
 	if !found {
 		return nil, false, nil

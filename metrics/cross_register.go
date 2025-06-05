@@ -90,7 +90,7 @@ func (c *PrometheusConfig) UnregisterPrometheusMetrics() {
 func (c *PrometheusConfig) UpdatePrometheusMetricsOnce() {
 	mutex.Lock()
 	defer mutex.Unlock()
-	c.Registry.Each(func(name string, i interface{}) {
+	c.Registry.Each(func(name string, i any) {
 		switch metric := i.(type) {
 		case gometrics.Counter:
 			c.gaugeFromNameAndValue(name, float64(metric.Count()))

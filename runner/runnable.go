@@ -78,7 +78,7 @@ func Run(ctx context.Context, runnables ...Runnable) error {
 	return wg.Wait().ErrorOrNil()
 }
 
-func recoverPanicOrReturnErr(recover interface{}, err error) error {
+func recoverPanicOrReturnErr(recover any, err error) error {
 	if r := recover; r != nil {
 		// Same as stdlib http server code. Manually allocate stack trace buffer size
 		// to prevent excessively large logs

@@ -46,7 +46,7 @@ func toLegacySpan(span trace.Span) *legacySpan {
 // Span ...
 type Span interface {
 	trace.Span
-	SetTag(key string, value interface{})
+	SetTag(key string, value any)
 	Finish()
 	LogFields(fields ...Field)
 	SetOperationName(name string)
@@ -65,7 +65,7 @@ func StartSpanFromContext(ctx context.Context, operationName string, opts ...Spa
 }
 
 // SetTag sets the given key and value as OpenTelemetry attributes.
-func (l *legacySpan) SetTag(key string, value interface{}) {
+func (l *legacySpan) SetTag(key string, value any) {
 	l.Span.SetAttributes(KeyValueToAttribute(key, value))
 }
 

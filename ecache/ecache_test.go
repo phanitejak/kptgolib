@@ -14,7 +14,7 @@ func setup(t *testing.T) (a *assert.Assertions, c *ECache) {
 	return
 }
 
-func assertKey(a *assert.Assertions, c *ECache, key string, eV interface{}, eE error, eF bool) {
+func assertKey(a *assert.Assertions, c *ECache, key string, eV any, eE error, eF bool) {
 	v, f, e := c.Get(key)
 	a.Equal(eF, f, "Failed for key %s", key)
 	a.Equal(eE, e, "Failed for key %s", key)

@@ -18,8 +18,8 @@ type expectedCall struct {
 	addExpectedCall func(call *expectedCall)
 	operation       string
 	error           error
-	expectedParams  interface{}
-	result          interface{}
+	expectedParams  any
+	result          any
 }
 
 var _ Client = &MockClient{}
@@ -64,10 +64,10 @@ func (m *MockClient) List(path string) (result *api.Secret, err error) {
 	return
 }
 
-func (m *MockClient) Write(path string, data map[string]interface{}) (result *api.Secret, err error) {
+func (m *MockClient) Write(path string, data map[string]any) (result *api.Secret, err error) {
 	writeParameters := struct {
 		p string
-		d map[string]interface{}
+		d map[string]any
 	}{p: path, d: data}
 
 	callResult, err := m.checkCallIsCorrect("write", writeParameters)
@@ -122,10 +122,10 @@ func (m *MockClient) WhenRead(path string) *expectedCall {
 	return c
 }
 
-func (m *MockClient) WhenWrite(path string, data map[string]interface{}) *expectedCall {
+func (m *MockClient) WhenWrite(path string, data map[string]any) *expectedCall {
 	writeParameters := struct {
 		p string
-		d map[string]interface{}
+		d map[string]any
 	}{p: path, d: data}
 
 	c := &expectedCall{operation: "write", expectedParams: writeParameters, addExpectedCall: m.addExpectedCall}
@@ -137,7 +137,7 @@ func (m *MockClient) WhenDelete(path string) *expectedCall {
 	return c
 }
 
-func (ec *expectedCall) ThenReturn(result interface{}) {
+func (ec *expectedCall) ThenReturn(result any) {
 	ec.result = result
 	ec.addExpectedCall(ec)
 }
@@ -147,7 +147,7 @@ func (ec *expectedCall) ThenError(err error) {
 	ec.addExpectedCall(ec)
 }
 
-func (m *MockClient) checkCallIsCorrect(methodName string, actualParams interface{}) (expectedResult interface{}, err error) {
+func (m *MockClient) checkCallIsCorrect(methodName string, actualParams any) (expectedResult any, err error) {
 	for k, v := range m.expectedCalls {
 		if v.operation == methodName {
 			if k != 0 {
@@ -183,7 +183,7 @@ func (m *MockClient) failWithBrokenOrderError(operation string) error {
 	return e
 }
 
-func (m *MockClient) failWithParameterMismatchError(operation string, expectedParams interface{}, actualParams interface{}) error {
+func (m *MockClient) failWithParameterMismatchError(operation string, expectedParams any, actualParams any) error {
 	e := fmt.Errorf("parameter mismatch on %s operation. expected: %v, actual: %v", operation, expectedParams, actualParams)
 	m.t.Error(e)
 	return e

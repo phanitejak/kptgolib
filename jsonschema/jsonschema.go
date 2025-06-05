@@ -4,7 +4,7 @@ import (
 	"github.com/xeipuuv/gojsonschema"
 )
 
-func Validate(request interface{}, schema string) (isValid bool, message string, err error) {
+func Validate(request any, schema string) (isValid bool, message string, err error) {
 	requestLoader := gojsonschema.NewGoLoader(request)
 
 	schemaLoader := gojsonschema.NewStringLoader(schema)

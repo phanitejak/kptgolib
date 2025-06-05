@@ -30,7 +30,7 @@ type ConfigFn func(*config) error
 
 type Client interface {
 	Read(string) (*api.Secret, error)
-	Write(string, map[string]interface{}) (*api.Secret, error)
+	Write(string, map[string]any) (*api.Secret, error)
 	Delete(string) (*api.Secret, error)
 	List(string) (*api.Secret, error)
 	Mount(string, *api.MountInput) error
@@ -83,7 +83,7 @@ func (c *client) Read(path string) (secret *api.Secret, err error) {
 	})
 }
 
-func (c *client) Write(path string, data map[string]interface{}) (secret *api.Secret, err error) {
+func (c *client) Write(path string, data map[string]any) (secret *api.Secret, err error) {
 	err = c.connectIfNotInitialized()
 	if err != nil {
 		return nil, err
@@ -367,8 +367,8 @@ func (h vaultClientHolder) set(inst *api.Client) {
 	h.setInstCh <- inst
 }
 
-func createAuthData(jwt string, role string) (authData map[string]interface{}) {
-	authData = make(map[string]interface{})
+func createAuthData(jwt string, role string) (authData map[string]any) {
+	authData = make(map[string]any)
 
 	authData["role"] = role
 	authData["jwt"] = jwt

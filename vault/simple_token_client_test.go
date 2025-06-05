@@ -36,7 +36,7 @@ func Test_tokenSetAndPutMethodUsed_whenUpdatingSecret(t *testing.T) {
 	tokenClient, err := NewSimpleTokenClient(mockVaultServerURL, "helloToken")
 	require.NoError(t, err)
 
-	_, err = tokenClient.Write("/my/path", map[string]interface{}{"hello": "world"})
+	_, err = tokenClient.Write("/my/path", map[string]any{"hello": "world"})
 	require.NoError(t, err)
 
 	assert.NotNil(t, handler.capturedRequest, "Request should have been captured, but nothing came")

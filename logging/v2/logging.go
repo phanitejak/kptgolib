@@ -26,33 +26,33 @@ var exit = os.Exit
 
 // Logger is the interface for loggers.
 type Logger interface {
-	Debug(ctx context.Context, v ...interface{})
-	Debugln(ctx context.Context, v ...interface{})
-	Debugf(ctx context.Context, f string, v ...interface{})
+	Debug(ctx context.Context, v ...any)
+	Debugln(ctx context.Context, v ...any)
+	Debugf(ctx context.Context, f string, v ...any)
 
-	Info(ctx context.Context, v ...interface{})
-	Infoln(ctx context.Context, v ...interface{})
-	Infof(ctx context.Context, f string, v ...interface{})
+	Info(ctx context.Context, v ...any)
+	Infoln(ctx context.Context, v ...any)
+	Infof(ctx context.Context, f string, v ...any)
 
-	Error(ctx context.Context, v ...interface{})
-	Errorln(ctx context.Context, v ...interface{})
-	Errorf(ctx context.Context, f string, v ...interface{})
+	Error(ctx context.Context, v ...any)
+	Errorln(ctx context.Context, v ...any)
+	Errorf(ctx context.Context, f string, v ...any)
 
-	With(key string, value interface{}) Logger
-	WithFields(map[string]interface{}) Logger
+	With(key string, value any) Logger
+	WithFields(map[string]any) Logger
 
 	// log with Error* and exit
-	Fatal(ctx context.Context, v ...interface{})
-	Fatalln(ctx context.Context, v ...interface{})
-	Fatalf(ctx context.Context, f string, v ...interface{})
+	Fatal(ctx context.Context, v ...any)
+	Fatalln(ctx context.Context, v ...any)
+	Fatalf(ctx context.Context, f string, v ...any)
 }
 
 // StdLogger is the interface which allows us to use Logger with Print methods.
 // To use this Logger as StdLogger just type cast the Logger to StdLogger.
 type StdLogger interface {
-	Print(ctx context.Context, v ...interface{})
-	Println(ctx context.Context, v ...interface{})
-	Printf(ctx context.Context, f string, v ...interface{})
+	Print(ctx context.Context, v ...any)
+	Println(ctx context.Context, v ...any)
+	Printf(ctx context.Context, f string, v ...any)
 }
 
 type logger struct {
@@ -61,91 +61,91 @@ type logger struct {
 }
 
 // With adds kv pair to log message
-func (l logger) With(key string, value interface{}) Logger {
+func (l logger) With(key string, value any) Logger {
 	return logger{entry: l.entry.WithField(key, value)}
 }
 
 // WithFields adds map as a kv pairs to log message
-func (l logger) WithFields(fields map[string]interface{}) Logger {
+func (l logger) WithFields(fields map[string]any) Logger {
 	return logger{entry: l.entry.WithFields(fields)}
 }
 
 // Debug logs a message at level Debug on the standard logger.
-func (l logger) Debug(ctx context.Context, args ...interface{}) {
+func (l logger) Debug(ctx context.Context, args ...any) {
 	l.with(ctx, false).sourced().Debug(args...)
 }
 
 // Debugln logs a message at level Debug on the standard logger.
-func (l logger) Debugln(ctx context.Context, args ...interface{}) {
+func (l logger) Debugln(ctx context.Context, args ...any) {
 	l.with(ctx, false).sourced().Debugln(args...)
 }
 
 // Debugf logs a message at level Debug on the standard logger.
-func (l logger) Debugf(ctx context.Context, format string, args ...interface{}) {
+func (l logger) Debugf(ctx context.Context, format string, args ...any) {
 	l.with(ctx, false).sourced().Debugf(format, args...)
 }
 
 // Info logs a message at level Info on the standard logger.
-func (l logger) Info(ctx context.Context, args ...interface{}) {
+func (l logger) Info(ctx context.Context, args ...any) {
 	l.with(ctx, false).sourced().Info(args...)
 }
 
 // Infoln logs a message at level Info on the standard logger.
-func (l logger) Infoln(ctx context.Context, args ...interface{}) {
+func (l logger) Infoln(ctx context.Context, args ...any) {
 	l.with(ctx, false).sourced().Infoln(args...)
 }
 
 // Infof logs a message at level Info on the standard logger.
-func (l logger) Infof(ctx context.Context, format string, args ...interface{}) {
+func (l logger) Infof(ctx context.Context, format string, args ...any) {
 	l.with(ctx, false).sourced().Infof(format, args...)
 }
 
 // Error logs a message at level Error on the standard logger.
-func (l logger) Error(ctx context.Context, args ...interface{}) {
+func (l logger) Error(ctx context.Context, args ...any) {
 	l.with(ctx, true).sourced().WithField("stack_trace", string(debug.Stack())).Error(args...)
 }
 
 // Errorln logs a message at level Error on the standard logger.
-func (l logger) Errorln(ctx context.Context, args ...interface{}) {
+func (l logger) Errorln(ctx context.Context, args ...any) {
 	l.with(ctx, true).sourced().WithField("stack_trace", string(debug.Stack())).Errorln(args...)
 }
 
 // Errorf logs a message at level Error on the standard logger.
-func (l logger) Errorf(ctx context.Context, format string, args ...interface{}) {
+func (l logger) Errorf(ctx context.Context, format string, args ...any) {
 	l.with(ctx, true).sourced().WithField("stack_trace", string(debug.Stack())).Errorf(format, args...)
 }
 
 // Print logs a message at level Debug on the standard logger.
-func (l logger) Print(ctx context.Context, args ...interface{}) {
+func (l logger) Print(ctx context.Context, args ...any) {
 	l.with(ctx, false).sourced().Debug(args...)
 }
 
 // Println logs a message at level Debug on the standard logger.
-func (l logger) Println(ctx context.Context, args ...interface{}) {
+func (l logger) Println(ctx context.Context, args ...any) {
 	l.with(ctx, false).sourced().Debugln(args...)
 }
 
 // Printf logs a message at level Debug on the standard logger.
-func (l logger) Printf(ctx context.Context, format string, args ...interface{}) {
+func (l logger) Printf(ctx context.Context, format string, args ...any) {
 	l.with(ctx, false).sourced().Debugf(format, args...)
 }
 
 // Fatal logs a message at level Error on the standard logger and exits.
-func (l logger) Fatal(ctx context.Context, args ...interface{}) {
+func (l logger) Fatal(ctx context.Context, args ...any) {
 	l.depth++
 	l.Error(ctx, args...)
 	exit(1)
 }
 
 // Fatalln logs a message at level Error on the standard logger.
-func (l logger) Fatalln(ctx context.Context, args ...interface{}) {
+func (l logger) Fatalln(ctx context.Context, args ...any) {
 	l.depth++
 	l.Errorln(ctx, args...)
 	exit(1)
 }
 
 // Fatalf logs a message at level Error on the standard logger and exits.
-func (l logger) Fatalf(ctx context.Context, format string, args ...interface{}) {
+func (l logger) Fatalf(ctx context.Context, format string, args ...any) {
 	l.depth++
 	l.Errorf(ctx, format, args...)
 	exit(1)

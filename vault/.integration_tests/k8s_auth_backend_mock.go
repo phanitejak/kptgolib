@@ -74,7 +74,7 @@ func authenticate(jwt, roleName string, renewable bool, ttl time.Duration) *logi
 			Metadata: map[string]string{
 				"role": roleName, "jwt": jwt,
 			},
-			InternalData: map[string]interface{}{
+			InternalData: map[string]any{
 				"role": roleName, "jwt": jwt,
 			},
 			LeaseOptions: logical.LeaseOptions{

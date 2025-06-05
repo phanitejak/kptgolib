@@ -153,9 +153,9 @@ func TestVaultClient(t *testing.T) {
 
 func connectivity(t *testing.T, p testParams) {
 	secretPath1 := "cubbyhole/secret1"
-	secretData1 := map[string]interface{}{"key": "value"}
+	secretData1 := map[string]any{"key": "value"}
 	secretPath2 := "cubbyhole/secret2"
-	secretData2 := map[string]interface{}{"key": "value"}
+	secretData2 := map[string]any{"key": "value"}
 
 	_, err := p.client.Write(secretPath1, secretData1)
 	require.NoError(t, err, "could not write secret")
@@ -167,7 +167,7 @@ func connectivity(t *testing.T, p testParams) {
 	require.NoError(t, err, "could not list secrets")
 	require.NotNil(t, secretList)
 	require.NotNil(t, secretList.Data)
-	require.EqualValues(t, map[string]interface{}{"keys": []interface{}{"secret1", "secret2"}}, secretList.Data)
+	require.EqualValues(t, map[string]any{"keys": []any{"secret1", "secret2"}}, secretList.Data)
 
 	secret, err := p.client.Read(secretPath1)
 	require.NoError(t, err, "could not read secretData")
@@ -180,7 +180,7 @@ func connectivity(t *testing.T, p testParams) {
 }
 
 func automaticallyReestablishConnectionIfVaultGoesDown(t *testing.T, p testParams) {
-	secretData := map[string]interface{}{"key": "value"}
+	secretData := map[string]any{"key": "value"}
 
 	_, err := p.client.Write("cubbyhole/someSecret", secretData)
 	require.NoError(t, err, "could not write secret")
@@ -229,7 +229,7 @@ func automaticallyReestablishConnectionIfVaultGoesDown(t *testing.T, p testParam
 }
 
 func reestablishConnectionIfK8STokenExpires(t *testing.T, p testParams) {
-	secretData := map[string]interface{}{"key": "value"}
+	secretData := map[string]any{"key": "value"}
 
 	_, err := p.client.Write("cubbyhole/someSecret", secretData)
 	require.NoError(t, err, "could not write secret")
@@ -244,7 +244,7 @@ func reestablishConnectionIfK8STokenExpires(t *testing.T, p testParams) {
 }
 
 func reuseTokenOnConcurrentWriteRequests(t *testing.T, p testParams) {
-	secretData := map[string]interface{}{"key": "value"}
+	secretData := map[string]any{"key": "value"}
 
 	_, err := p.client.Write("cubbyhole/someSecret", secretData)
 	require.NoError(t, err, "could not write secret")
@@ -269,7 +269,7 @@ func reuseTokenOnConcurrentWriteRequests(t *testing.T, p testParams) {
 }
 
 func reuseTokenOnConcurrentReadRequests(t *testing.T, p testParams) {
-	secretData := map[string]interface{}{"key": "value"}
+	secretData := map[string]any{"key": "value"}
 
 	_, err := p.client.Write("cubbyhole/someSecret", secretData)
 	require.NoError(t, err, "could not write secret")
@@ -317,7 +317,7 @@ func reuseTokenOnConcurrentListRequests(t *testing.T, p testParams) {
 }
 
 func reuseTokenOnConcurrentDeleteRequests(t *testing.T, p testParams) {
-	secretData := map[string]interface{}{"key": "value"}
+	secretData := map[string]any{"key": "value"}
 
 	_, err := p.client.Write("cubbyhole/someSecret", secretData)
 	require.NoError(t, err, "could not write secret")
@@ -365,7 +365,7 @@ func concurrentRequestsWhenTogglingVault(t *testing.T, p testParams) {
 }
 
 func openBreakerOnFailureTHAndCloseAfterTimeout(t *testing.T, p testParams) {
-	secretData := map[string]interface{}{"key": "value"}
+	secretData := map[string]any{"key": "value"}
 
 	_, err := p.client.Write("cubbyhole/someSecret", secretData)
 	require.NoError(t, err, "could not write secret")
@@ -481,7 +481,7 @@ func TestShouldOpenBreakerOnConnectionFailures(t *testing.T) {
 		vault.BreakerErrorTH(1))
 	require.NoError(t, err, "should create client")
 
-	secretData := map[string]interface{}{"key": "value"}
+	secretData := map[string]any{"key": "value"}
 
 	_, err = client.Write("cubbyhole/someSecret", secretData)
 	require.Error(t, err, "should fail due to login error")

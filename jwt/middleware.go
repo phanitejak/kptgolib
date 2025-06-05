@@ -38,7 +38,7 @@ type conf struct {
 	// Keys in the map are json path strings, parsable by github.com/tidwall/gjson library.
 	// Values in the map will be used as keys for putting values into context.
 	// Refer to https://golang.org/pkg/context/#WithValue for more details on context keys.
-	claimsToExtract map[string]interface{}
+	claimsToExtract map[string]any
 
 	// set to true, if token must always be present in a request
 	requireToken bool
@@ -61,10 +61,10 @@ type conf struct {
 
 	// Context Key to store extracted bearer token in the request context
 	// If tokenContextKey is nil - token will not be stored in the request context
-	tokenContextKey interface{}
+	tokenContextKey any
 }
 
-func WithClaimsToExtract(claimsToExtract map[string]interface{}) func(conf) (conf, error) {
+func WithClaimsToExtract(claimsToExtract map[string]any) func(conf) (conf, error) {
 	return func(c conf) (conf, error) {
 		c.claimsToExtract = claimsToExtract
 		return c, nil
@@ -116,7 +116,7 @@ func WithErrorHandler(errorHandler func(w http.ResponseWriter, r *http.Request, 
 	}
 }
 
-func WithStoredTokenInContext(tokenContextKey interface{}) func(conf) (conf, error) {
+func WithStoredTokenInContext(tokenContextKey any) func(conf) (conf, error) {
 	return func(c conf) (conf, error) {
 		c.tokenContextKey = tokenContextKey
 		return c, nil
@@ -125,7 +125,7 @@ func WithStoredTokenInContext(tokenContextKey interface{}) func(conf) (conf, err
 
 func NewMiddleware(options ...func(conf) (conf, error)) (Middleware, error) {
 	c := conf{
-		claimsToExtract:        map[string]interface{}{},
+		claimsToExtract:        map[string]any{},
 		requireToken:           true,
 		ignoreErrors:           false,
 		ignoreNotExistingClaim: false,

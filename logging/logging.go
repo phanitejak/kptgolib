@@ -22,37 +22,37 @@ var exit = os.Exit
 
 // Logger is the interface for loggers.
 type Logger interface {
-	Debug(...interface{})
-	Debugln(...interface{})
-	Debugf(string, ...interface{})
+	Debug(...any)
+	Debugln(...any)
+	Debugf(string, ...any)
 
-	Info(...interface{})
-	Infoln(...interface{})
-	Infof(string, ...interface{})
+	Info(...any)
+	Infoln(...any)
+	Infof(string, ...any)
 
-	Error(...interface{})
-	Errorln(...interface{})
-	Errorf(string, ...interface{})
+	Error(...any)
+	Errorln(...any)
+	Errorf(string, ...any)
 
-	With(key string, value interface{}) Logger
-	WithFields(map[string]interface{}) Logger
+	With(key string, value any) Logger
+	WithFields(map[string]any) Logger
 
 	// log with Error* and exit
-	Fatal(...interface{})
-	Fatalln(...interface{})
-	Fatalf(string, ...interface{})
+	Fatal(...any)
+	Fatalln(...any)
+	Fatalf(string, ...any)
 
-	Warn(...interface{})
-	Warnln(...interface{})
-	Warnf(string, ...interface{})
+	Warn(...any)
+	Warnln(...any)
+	Warnf(string, ...any)
 }
 
 // StdLogger is the interface which allows us to use Logger with Print methods.
 // To use this Logger as StdLogger just type cast the Logger to StdLogger.
 type StdLogger interface {
-	Print(...interface{})
-	Println(...interface{})
-	Printf(string, ...interface{})
+	Print(...any)
+	Println(...any)
+	Printf(string, ...any)
 }
 
 type logger struct {
@@ -61,108 +61,108 @@ type logger struct {
 }
 
 // With adds kv pair to log message.
-func (l logger) With(key string, value interface{}) Logger {
+func (l logger) With(key string, value any) Logger {
 	return logger{entry: l.entry.WithField(key, value)}
 }
 
 // WithFields adds map as a kv pairs to log message.
-func (l logger) WithFields(fields map[string]interface{}) Logger {
+func (l logger) WithFields(fields map[string]any) Logger {
 	return logger{entry: l.entry.WithFields(fields)}
 }
 
 // Debug logs a message at level Debug on the standard logger.
-func (l logger) Debug(args ...interface{}) {
+func (l logger) Debug(args ...any) {
 	l.sourced(l.depth).Debug(args...)
 }
 
 // Debugln logs a message at level Debug on the standard logger.
-func (l logger) Debugln(args ...interface{}) {
+func (l logger) Debugln(args ...any) {
 	l.sourced(l.depth).Debugln(args...)
 }
 
 // Debugf logs a message at level Debug on the standard logger.
-func (l logger) Debugf(format string, args ...interface{}) {
+func (l logger) Debugf(format string, args ...any) {
 	l.sourced(l.depth).Debugf(format, args...)
 }
 
 // Info logs a message at level Info on the standard logger.
-func (l logger) Info(args ...interface{}) {
+func (l logger) Info(args ...any) {
 	l.sourced(l.depth).Info(args...)
 }
 
 // Infoln logs a message at level Info on the standard logger.
-func (l logger) Infoln(args ...interface{}) {
+func (l logger) Infoln(args ...any) {
 	l.sourced(l.depth).Infoln(args...)
 }
 
 // Infof logs a message at level Info on the standard logger.
-func (l logger) Infof(format string, args ...interface{}) {
+func (l logger) Infof(format string, args ...any) {
 	l.sourced(l.depth).Infof(format, args...)
 }
 
 // Error logs a message at level Error on the standard logger.
-func (l logger) Error(args ...interface{}) {
+func (l logger) Error(args ...any) {
 	l.sourced(l.depth).WithField("stack_trace", string(debug.Stack())).Error(args...)
 }
 
 // Errorln logs a message at level Error on the standard logger.
-func (l logger) Errorln(args ...interface{}) {
+func (l logger) Errorln(args ...any) {
 	l.sourced(l.depth).WithField("stack_trace", string(debug.Stack())).Errorln(args...)
 }
 
 // Errorf logs a message at level Error on the standard logger.
-func (l logger) Errorf(format string, args ...interface{}) {
+func (l logger) Errorf(format string, args ...any) {
 	l.sourced(l.depth).WithField("stack_trace", string(debug.Stack())).Errorf(format, args...)
 }
 
 // Print logs a message at level Debug on the standard logger.
-func (l logger) Print(args ...interface{}) {
+func (l logger) Print(args ...any) {
 	l.sourced(l.depth).Debug(args...)
 }
 
 // Println logs a message at level Debug on the standard logger.
-func (l logger) Println(args ...interface{}) {
+func (l logger) Println(args ...any) {
 	l.sourced(l.depth).Debugln(args...)
 }
 
 // Printf logs a message at level Debug on the standard logger.
-func (l logger) Printf(format string, args ...interface{}) {
+func (l logger) Printf(format string, args ...any) {
 	l.sourced(l.depth).Debugf(format, args...)
 }
 
 // Fatal logs a message at level Error on the standard logger and exits.
-func (l logger) Fatal(args ...interface{}) {
+func (l logger) Fatal(args ...any) {
 	l.depth++
 	l.Error(args...)
 	exit(1)
 }
 
 // Fatalln logs a message at level Error on the standard logger.
-func (l logger) Fatalln(args ...interface{}) {
+func (l logger) Fatalln(args ...any) {
 	l.depth++
 	l.Errorln(args...)
 	exit(1)
 }
 
 // Fatalf logs a message at level Error on the standard logger and exits.
-func (l logger) Fatalf(format string, args ...interface{}) {
+func (l logger) Fatalf(format string, args ...any) {
 	l.depth++
 	l.Errorf(format, args...)
 	exit(1)
 }
 
 // Warn logs a message at level Warn on the standard logger.
-func (l logger) Warn(args ...interface{}) {
+func (l logger) Warn(args ...any) {
 	l.sourced(l.depth).Warn(args...)
 }
 
 // Warnln logs a message at level Warn on the standard logger.
-func (l logger) Warnln(args ...interface{}) {
+func (l logger) Warnln(args ...any) {
 	l.sourced(l.depth).Warnln(args...)
 }
 
 // Warnf logs a message at level Warn on the standard logger.
-func (l logger) Warnf(format string, args ...interface{}) {
+func (l logger) Warnf(format string, args ...any) {
 	l.sourced(l.depth).Warnf(format, args...)
 }
 

@@ -14,7 +14,7 @@ type Field struct {
 	fieldType    fieldType
 	numericVal   int64
 	stringVal    string
-	interfaceVal interface{}
+	interfaceVal any
 }
 
 type fieldType int
@@ -71,7 +71,7 @@ func Error(err error) Field {
 // Please pass in an immutable object, otherwise there may be concurrency issues.
 // Such as passing in the map, log.Object may result in "fatal error: concurrent map iteration and map write".
 // Because span is sent asynchronously, it is possible that this map will also be modified.
-func Object(key string, obj interface{}) Field {
+func Object(key string, obj any) Field {
 	return Field{
 		key:          key,
 		fieldType:    objectType,
@@ -105,11 +105,11 @@ func (e *bridgeFieldEncoder) EmitInt(key string, value int) {
 	e.emitCommon(key, value)
 }
 
-func (e *bridgeFieldEncoder) EmitObject(key string, value interface{}) {
+func (e *bridgeFieldEncoder) EmitObject(key string, value any) {
 	e.emitCommon(key, value)
 }
 
-func (e *bridgeFieldEncoder) emitCommon(key string, value interface{}) {
+func (e *bridgeFieldEncoder) emitCommon(key string, value any) {
 	e.pairs = append(e.pairs, KeyValueToAttribute(key, value))
 }
 
@@ -122,7 +122,7 @@ type Encoder interface {
 	EmitString(key, value string)
 	EmitBool(key string, value bool)
 	EmitInt(key string, value int)
-	EmitObject(key string, value interface{})
+	EmitObject(key string, value any)
 }
 
 // Marshal passes a Field instance through to the appropriate
@@ -153,8 +153,8 @@ func (lf Field) Key() string {
 	return lf.key
 }
 
-// Value returns the field's value as interface{}.
-func (lf Field) Value() interface{} {
+// Value returns the field's value as any.
+func (lf Field) Value() any {
 	switch lf.fieldType {
 	case stringType:
 		return lf.stringVal
@@ -175,7 +175,7 @@ func (lf Field) String() string {
 }
 
 // KeyValueToAttribute ...
-func KeyValueToAttribute(k string, v interface{}) attribute.KeyValue {
+func KeyValueToAttribute(k string, v any) attribute.KeyValue {
 	key := stringToAttributeKey(k)
 	switch val := v.(type) {
 	case bool:
