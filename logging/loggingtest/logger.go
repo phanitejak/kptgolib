@@ -35,7 +35,7 @@ func (t TestLogger) Debugln(args ...any) {
 
 // Debugf is logging arguments using t.Logf.
 func (t TestLogger) Debugf(msg string, args ...any) {
-	t.t.Logf(t.formatf(msg, args...))
+	t.t.Log(t.formatf(msg, args...))
 }
 
 // Info is logging arguments using t.Log.
@@ -50,7 +50,7 @@ func (t TestLogger) Infoln(args ...any) {
 
 // Infof is logging arguments using t.Logf.
 func (t TestLogger) Infof(msg string, args ...any) {
-	t.t.Logf(t.formatf(msg, args...))
+	t.t.Log(t.formatf(msg, args...))
 }
 
 // Warn is logging arguments using t.Log.
@@ -65,7 +65,7 @@ func (t TestLogger) Warnln(args ...any) {
 
 // Warnf is logging arguments using t.Logf.
 func (t TestLogger) Warnf(msg string, args ...any) {
-	t.t.Logf(t.formatf(msg, args...))
+	t.t.Log(t.formatf(msg, args...))
 }
 
 // Error is logging arguments using t.Log instead of t.Error in case error level logging is expected.
@@ -80,7 +80,7 @@ func (t TestLogger) Errorln(args ...any) {
 
 // Errorf is logging arguments using t.Logf instead of t.Errorf in case error level logging is expected.
 func (t TestLogger) Errorf(msg string, args ...any) {
-	t.t.Logf(t.formatf(msg, args...))
+	t.t.Log(t.formatf(msg, args...))
 }
 
 // With is not supported for test logger.
@@ -105,7 +105,7 @@ func (t TestLogger) Fatalln(args ...any) {
 
 // Fatalf is logging arguments  using t.Fatalf.
 func (t TestLogger) Fatalf(msg string, args ...any) {
-	t.t.Fatalf(t.formatf(msg, args...))
+	t.t.Fatal(t.formatf(msg, args...))
 }
 
 // Print is logging arguments using t.Log.
@@ -120,7 +120,7 @@ func (t TestLogger) Println(args ...any) {
 
 // Printf is logging arguments using t.Logf.
 func (t TestLogger) Printf(msg string, args ...any) {
-	t.t.Logf(t.formatf(msg, args...))
+	t.t.Log(t.formatf(msg, args...))
 }
 
 // IncDepth can be used by wrappers to increment stack depth.
