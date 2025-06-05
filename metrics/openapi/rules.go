@@ -10,18 +10,24 @@ import (
 
 var rulePattern = regexp.MustCompile(`(?s)({[^}]*})`)
 
-// ToInstrumentRules ...
+// ToInstrumentRules converts OpenAPI path templates into regex rules for instrumentation.
+// Example: "/users/{id}" → "^/users/[^/]+$"
 func ToInstrumentRules(swagger *openapi3.T) []metrics.InstrumentRule {
 	var rules []metrics.InstrumentRule
-	for uri := range swagger.Paths.Map() {
+	pathsMap := swagger.Paths.Map()
+	for uri := range pathsMap {
 		if strings.Contains(uri, "{") {
-			rules = append(rules, metrics.InstrumentRule{Condition: regexp.MustCompile(rulePattern.ReplaceAllString("^"+uri+"$", `[^/]+`)), URIPath: uri})
+			pattern := "^" + rulePattern.ReplaceAllString(uri, `[^/]+`) + "$"
+			rules = append(rules, metrics.InstrumentRule{
+				Condition: regexp.MustCompile(pattern),
+				URIPath:   uri,
+			})
 		}
 	}
 	return rules
 }
 
-// ToInstrumentRulesV2 uses never openapi implementation.
+// ToInstrumentRulesV2 is an alias to ToInstrumentRules for forward compatibility.
 func ToInstrumentRulesV2(swagger *openapi3.T) []metrics.InstrumentRule {
 	return ToInstrumentRules(swagger)
 }

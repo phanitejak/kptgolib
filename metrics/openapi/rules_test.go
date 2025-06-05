@@ -13,22 +13,18 @@ import (
 
 func TestToInstrumentRules(t *testing.T) {
 	tests := []struct {
-		name    string
-		swagger *openapi3.T
-		want    []metrics.InstrumentRule
+		name  string
+		paths []string
+		want  []metrics.InstrumentRule
 	}{
 		{
-			name: "Without path params",
-			swagger: &openapi3.T{
-				Paths: openapi3.NewPaths(openapi3.WithPath("/v1/somepath/", nil)),
-			},
-			want: nil,
+			name:  "Without path params",
+			paths: []string{"/v1/somepath/"},
+			want:  nil,
 		},
 		{
-			name: "With single path param",
-			swagger: &openapi3.T{
-				Paths: openapi3.NewPaths(openapi3.WithPath("/v1/somepath/{parameter}/details", nil)),
-			},
+			name:  "With single path param",
+			paths: []string{"/v1/somepath/{parameter}/details"},
 			want: []metrics.InstrumentRule{
 				{
 					Condition: regexp.MustCompile("^/v1/somepath/[^/]+/details$"),
@@ -37,13 +33,8 @@ func TestToInstrumentRules(t *testing.T) {
 			},
 		},
 		{
-			name: "With multiple paths",
-			swagger: &openapi3.T{
-				Paths: openapi3.NewPaths(
-					openapi3.WithPath("/v1/somepath/{parameter}/details", nil),
-					openapi3.WithPath("/v1/otherpath/{parameter}/details", nil),
-				),
-			},
+			name:  "With multiple paths",
+			paths: []string{"/v1/somepath/{parameter}/details", "/v1/otherpath/{parameter}/details"},
 			want: []metrics.InstrumentRule{
 				{
 					Condition: regexp.MustCompile("^/v1/somepath/[^/]+/details$"),
@@ -56,10 +47,8 @@ func TestToInstrumentRules(t *testing.T) {
 			},
 		},
 		{
-			name: "With multiple path params",
-			swagger: &openapi3.T{
-				Paths: openapi3.NewPaths(openapi3.WithPath("/v1/somepath/{parameter}/details/{subparam}", nil)),
-			},
+			name:  "With multiple path params",
+			paths: []string{"/v1/somepath/{parameter}/details/{subparam}"},
 			want: []metrics.InstrumentRule{
 				{
 					Condition: regexp.MustCompile("^/v1/somepath/[^/]+/details/[^/]+$"),
@@ -71,7 +60,13 @@ func TestToInstrumentRules(t *testing.T) {
 	for _, tt := range tests {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
-			rules := ToInstrumentRules(tt.swagger)
+			swagger := &openapi3.T{
+				Paths: &openapi3.Paths{},
+			}
+			for _, p := range tt.paths {
+				swagger.Paths.Set(p, nil)
+			}
+			rules := ToInstrumentRules(swagger)
 
 			sort.Slice(rules, func(i, j int) bool { return rules[i].URIPath < rules[j].URIPath })
 			sort.Slice(tt.want, func(i, j int) bool { return tt.want[i].URIPath < tt.want[j].URIPath })
