@@ -20,7 +20,7 @@ type MockSqlite struct {
 func New(withForeignKeys bool, enableLogging bool) (*MockSqlite, error) {
 	cfg := &gorm.Config{}
 	if enableLogging {
-		cfg.Logger = logger.Default.LogMode(logger.Info),
+		cfg.Logger = logger.Default.LogMode(logger.Info)
 	}
 	db, err := gorm.Open(sqlite.Open(":memory:"), cfg)
 	if err != nil {
