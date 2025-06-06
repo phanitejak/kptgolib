@@ -17,10 +17,12 @@ type MockSqlite struct {
 }
 
 // New creates a new in-memory SQLite DB and returns a MockSqlite wrapper
-func New(withForeignKeys bool) (*MockSqlite, error) {
-	db, err := gorm.Open(sqlite.Open(":memory:"), &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Info),
-	})
+func New(withForeignKeys bool, enableLogging bool) (*MockSqlite, error) {
+	cfg := &gorm.Config{}
+	if enableLogging {
+		cfg.Logger = logger.Default.LogMode(logger.Info),
+	}
+	db, err := gorm.Open(sqlite.Open(":memory:"), cfg)
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect database: %w", err)
 	}
@@ -33,8 +35,8 @@ func New(withForeignKeys bool) (*MockSqlite, error) {
 	return &MockSqlite{DB: db}, nil
 }
 
-func MustNew(withForeignKeys bool) *MockSqlite {
-	db, err := New(withForeignKeys)
+func MustNew(withForeignKeys bool, enableLogging bool) *MockSqlite {
+	db, err := New(withForeignKeys, enableLogging)
 	if err != nil {
 		panic(err)
 	}
